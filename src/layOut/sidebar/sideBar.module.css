@@ -1,0 +1,9 @@
+.bodyContainer {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.outlet {
+    flex: 2;
+}

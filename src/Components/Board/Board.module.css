@@ -1,0 +1,65 @@
+.mainBoard {
+    background-color: #3b3e52;
+    padding: 10px;
+}
+
+.board {
+    width: 240px;
+   background-color: #303446;
+
+}
+
+.titleContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 2px solid red;
+    border-bottom:1px solid gray;
+    padding: 10px;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+}
+
+.taskListContainer {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.title {
+    margin:0;
+}
+
+.taskList {
+    padding: 10px;
+    border-radius: 5px;
+    color: black;
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    font-size: 15px;
+    background-color: aliceblue;
+    margin-bottom: 10px;
+}
+
+.listColor {
+    height: 100px;
+    width: 5px;
+    background-color: black;
+
+}
+
+.todos {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.todos p {
+    margin: 8px 0;
+    text-align: left;
+    font-size: 14px;
+}
