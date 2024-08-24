@@ -7,3 +7,22 @@
 .outlet {
     flex: 2;
 }
+
+.sidebarContainer {
+    display: flex;
+    flex-direction:column;
+    align-items:center;
+    gap: 15px;
+
+}
+
+.sideLink {
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+}
+
+.icon {
+    color:grey;
+    font-size: 35px;
+}
