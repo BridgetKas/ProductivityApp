@@ -1,3 +1,9 @@
+.mainBoardContainer {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
 .mainBoard {
     background-color: #3b3e52;
     padding: 10px;
@@ -13,7 +19,6 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border-top: 2px solid red;
     border-bottom:1px solid gray;
     padding: 10px;
 }
@@ -21,6 +26,7 @@
 .header {
     display: flex;
     align-items: center;
+    gap: 5px;
 }
 
 .taskListContainer {

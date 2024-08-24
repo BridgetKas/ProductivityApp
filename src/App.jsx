@@ -1,7 +1,7 @@
 import './App.css'
 import { createBrowserRouter,RouterProvider} from "react-router-dom";
-import BoardComponent from './Components/Board/Board';
 import LayoutPage from './layOut/layoutPage';
+import Board from './Components/Board/Board';
 
 
 
@@ -13,7 +13,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <BoardComponent/>,
+        element: <Board/>,
       },
       
     ]
