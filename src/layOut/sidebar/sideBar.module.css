@@ -1,7 +1,7 @@
 .bodyContainer {
     display: flex;
     align-items: flex-start;
-    width: 95%;
+    width: 90%;
     margin: 0 auto;
     gap: 20px;
     justify-content: space-between;
@@ -32,4 +32,11 @@
 .icon {
     color:grey;
     font-size: 35px;
+}
+
+
+@media(min-width:992px) {
+    .bodyContainer {
+        width: 95%;
+    }
 }

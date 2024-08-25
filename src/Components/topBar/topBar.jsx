@@ -9,7 +9,7 @@ function TopBar() {
     <header>
         <div className={styles.topBarContainer}>
             <div className={styles.mainsearchContainer}>
-                <div>
+                <div className={styles.search}>
                     <IoSearch style={{ fontSize: '30px', }}/>
                 </div>
                 <div className={styles.inputContainer}>

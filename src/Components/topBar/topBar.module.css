@@ -8,10 +8,7 @@
 }
 
 .mainsearchContainer {
-    display: flex;
-    align-items: center;
-    padding: 10px 40px;
-    background-color: #3b3e52;
+    display: none;
 }
 
 .input{
@@ -24,8 +21,7 @@
 .authorContainer {
     display: flex;
     align-items: center;
-    justify-content: center;
-    padding: 10px 40px;
+    margin-left: auto;
 }
 
 .authorContainer p {
@@ -38,13 +34,14 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding: 10px;
 }
 
 .mainiconContainer {
     display: flex;
     align-items: center;
-    padding: 20px 60px;
     gap: 15px;
+    padding-left: 15px;
 }
 
 .circleIcon {
@@ -79,5 +76,30 @@
 
 .button {
     color: #fff;
+}
 
+
+@media (min-width:992px) {
+    .mainsearchContainer {
+        display: flex;
+        align-items: center;
+        padding: 10px 40px;
+        background-color: #3b3e52;
+    }
+
+    .authorContainer {
+        justify-content: center;
+        padding: 10px 40px;
+    }
+
+    .features {
+        padding:0px;
+    }
+
+    .mainiconContainer {
+        padding: 20px 60px;
+        gap: 15px;
+    }
+
+    
 }
