@@ -19,6 +19,8 @@ function BoardComponent({title,color}) {
             <div className={styles.taskListContainer}>
                 <TaskComponent status='inComplete'/>
                 <TaskComponent status='reviewing'/>
+                <TaskComponent status='reviewing'/>
+                <TaskComponent status='reviewing'/>
             </div>
         </div>
     </div>

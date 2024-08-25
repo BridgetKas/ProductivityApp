@@ -1,0 +1,83 @@
+.topBarContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 70px;
+    background-color: #4a4e72;
+
+}
+
+.mainsearchContainer {
+    display: flex;
+    align-items: center;
+    padding: 10px 40px;
+    background-color: #3b3e52;
+}
+
+.input{
+    height: 50px;
+    width: 280px;
+    background-color: #3b3e52;
+    border: none;
+}
+
+.authorContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 40px;
+}
+
+.authorContainer p {
+    font-size: 18px;
+    padding: 0;
+    margin: 0;
+}
+
+.features {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.mainiconContainer {
+    display: flex;
+    align-items: center;
+    padding: 20px 60px;
+    gap: 15px;
+}
+
+.circleIcon {
+    display: flex;
+    align-items: center;
+}
+.iconContainer {
+    display: flex;
+    align-items: center;
+    gap:8px;
+}
+
+.iconContainer p {
+    margin: 0;
+    padding: 0;
+}
+
+.taskContainer {
+    display: flex;
+    align-items: center;
+    gap:20px;
+    padding-right: 15px;
+}
+
+.taskContainer p a {
+    color: #007bff;;
+}
+
+.btnContainer {
+    color: #fff;
+}
+
+.button {
+    color: #fff;
+
+}

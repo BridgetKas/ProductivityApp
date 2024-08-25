@@ -1,7 +1,10 @@
 .bodyContainer {
     display: flex;
-    align-items: center;
-    gap: 10px;
+    align-items: flex-start;
+    width: 95%;
+    margin: 0 auto;
+    gap: 20px;
+    justify-content: space-between;
 }
 
 .outlet {
@@ -13,7 +16,11 @@
     flex-direction:column;
     align-items:center;
     gap: 15px;
+    padding:10px;
+}
 
+.sidebarContainer p {
+    margin: 0;
 }
 
 .sideLink {

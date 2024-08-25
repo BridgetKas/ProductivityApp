@@ -1,13 +1,14 @@
 import {Outlet} from "react-router-dom"
 import styles from '../layOut/sidebar/sideBar.module.css'
 import SideBarComponent from "../layOut/sidebar/sideBar"
+import TopBar from "../Components/topBar/topBar"
 
 
 
 function LayoutPage() {
   return (
     <div>
-        <div>This is the Nav Bar</div>
+        <div><TopBar/></div>
         <div className={styles.bodyContainer} >
             <div className={styles.sideBar}><SideBarComponent/></div>
             <div className={styles.outlet}>

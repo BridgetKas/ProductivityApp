@@ -40,8 +40,10 @@ function SideBarComponent() {
         {
             sidebar.map(item =>(
                 <div key={item.id} className={styles.sideLink}>
-                    <NavLink to={item.path} className={styles.icon}>{item.icon}</NavLink>
-                    <span>{item.title}</span>
+                    <div>
+                        <NavLink to={item.path} className={styles.icon}>{item.icon}</NavLink>
+                    </div>
+                    <p>{item.title}</p>
                 </div>
             ))
         }
