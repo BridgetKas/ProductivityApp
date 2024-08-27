@@ -15,9 +15,10 @@ function TopBar() {
         setOpenModal(true)
     }
 
-    function saveTask() {
-
+    function closeModal(){
+        setOpenModal(false)
     }
+
   return (
     <header>
         <div className={styles.topBarContainer}>
@@ -70,13 +71,13 @@ function TopBar() {
                 </div>
             </div>
         </div>
-        <Modal show={openModal}>
+        <Modal show={openModal} onClose={closeModal}>
                 <div className={styles.textareaContainer}>
                     <input type='text' placeholder='Enter a title...' value={title} className={styles.taskInput} onChange={(e) => setTitle(e.target.value)}/>
                     <textarea id="story" rows="5" cols="33" placeholder='Enter a description' className={styles.textarea}> </textarea>
                 </div>
                 <div className='modalContainer'>
-                    <button className={styles.saveBtn} onClick={saveTask}>Save</button>
+                    <button className={styles.saveBtn} onClick=''>Save</button>
                 </div>
        </Modal>
     </header>
