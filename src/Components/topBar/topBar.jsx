@@ -2,9 +2,22 @@ import { IoSearch } from "react-icons/io5";
 import styles from './topBar.module.css'
 import { RiBearSmileFill } from "react-icons/ri";
 import { FaRegCircle } from "react-icons/fa";
+import {useState} from "react"
+import Modal from "../modal/modalComponent"
 
 
 function TopBar() {
+
+    const [openModal,setOpenModal] = useState(false)
+    const [title,setTitle] = useState('')
+
+    function isModalOpen() {
+        setOpenModal(true)
+    }
+
+    function saveTask() {
+
+    }
   return (
     <header>
         <div className={styles.topBarContainer}>
@@ -49,7 +62,7 @@ function TopBar() {
                 </div>
                 <div className={styles.taskContainer}>
                     <div>
-                        <p><a>Add a Task</a></p>
+                        <button onClick={isModalOpen}>Add a Task</button>
                     </div>
                     <div className={styles.btnContainer}>
                         <button className={styles.button}>Add a Board</button>
@@ -57,6 +70,15 @@ function TopBar() {
                 </div>
             </div>
         </div>
+        <Modal show={openModal}>
+                <div className={styles.textareaContainer}>
+                    <input type='text' placeholder='Enter a title...' value={title} className={styles.taskInput} onChange={(e) => setTitle(e.target.value)}/>
+                    <textarea id="story" rows="5" cols="33" placeholder='Enter a description' className={styles.textarea}> </textarea>
+                </div>
+                <div className='modalContainer'>
+                    <button className={styles.saveBtn} onClick={saveTask}>Save</button>
+                </div>
+       </Modal>
     </header>
   )
 }
