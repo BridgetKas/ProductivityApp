@@ -10,6 +10,8 @@ function TopBar() {
 
     const [openModal,setOpenModal] = useState(false)
     const [title,setTitle] = useState('')
+    const [status,setStatus] = useState('inComplete')
+    
 
     function isModalOpen() {
         setOpenModal(true)
@@ -17,6 +19,10 @@ function TopBar() {
 
     function closeModal(){
         setOpenModal(false)
+    }
+    
+    function changeStatus(e) {
+        setStatus(e.target.value)
     }
 
   return (
@@ -71,14 +77,25 @@ function TopBar() {
                 </div>
             </div>
         </div>
-        <Modal show={openModal} onClose={closeModal}>
+        <Modal show={openModal} onClose={closeModal} status={status}>
+            <div >
                 <div className={styles.textareaContainer}>
                     <input type='text' placeholder='Enter a title...' value={title} className={styles.taskInput} onChange={(e) => setTitle(e.target.value)}/>
                     <textarea id="story" rows="5" cols="33" placeholder='Enter a description' className={styles.textarea}> </textarea>
                 </div>
+                <div>
+                    {/* <label style={{color:'black'}}>Choose a task status</label> */}
+                    <select className={styles.selectarea}  value={status} onChange={changeStatus}>
+                        <option value="inComplete" selected>Incomplete</option>
+                        <option value="inprogress">In progress</option>
+                        <option value="reviewing">Reviewing</option>
+                        <option value="complete">Complete</option>
+                    </select>
+                </div>
                 <div className='modalContainer'>
                     <button className={styles.saveBtn} onClick=''>Save</button>
                 </div>
+            </div>
        </Modal>
     </header>
   )

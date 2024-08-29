@@ -95,6 +95,11 @@
     color: #fff;
 }
 
+.selectarea {
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
 .saveBtn {
     color: #fff;
 }
