@@ -18,23 +18,6 @@
     border: none;
 }
 
-.taskInput {
-    width: 274px;
-    padding: 10px;
-}
-
-.textareaContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-}
-
-.textarea {
-    padding: 10px;
-    margin-bottom: 10px;
-}
-
 .authorContainer {
     display: flex;
     align-items: center;
@@ -45,63 +28,6 @@
     font-size: 18px;
     padding: 0;
     margin: 0;
-}
-
-.features {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px;
-}
-
-.mainiconContainer {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    padding-left: 15px;
-}
-
-.circleIcon {
-    display: flex;
-    align-items: center;
-}
-.iconContainer {
-    display: flex;
-    align-items: center;
-    gap:8px;
-}
-
-.iconContainer p {
-    margin: 0;
-    padding: 0;
-}
-
-.taskContainer {
-    display: flex;
-    align-items: center;
-    gap:20px;
-    padding-right: 15px;
-}
-
-.taskContainer button {
-    color: #007bff;
-}
-
-.btnContainer {
-    color: #fff;
-}
-
-.button {
-    color: #fff;
-}
-
-.selectarea {
-    padding: 10px;
-    margin-bottom: 10px;
-}
-
-.saveBtn {
-    color: #fff;
 }
 
 @media (min-width:992px) {
@@ -117,14 +43,4 @@
         padding: 10px 40px;
     }
 
-    .features {
-        padding:0px;
-    }
-
-    .mainiconContainer {
-        padding: 20px 60px;
-        gap: 15px;
-    }
-
-    
 }
