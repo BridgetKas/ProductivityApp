@@ -16,6 +16,7 @@
     display: flex;
     align-items: center;
 }
+
 .iconContainer {
     display: flex;
     align-items: center;
@@ -45,11 +46,11 @@
 .button {
     color: #fff;
 }
+
 .mainBoardContainer {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     flex-wrap: wrap;
-    margin: 0 auto;
     justify-content: space-between;
 }
 
@@ -57,13 +58,12 @@
     background-color: #3b3e52;
     padding: 10px;
     width: 100%;
-
+    margin-bottom: 20px;
 }
 
 .board {
     width: 100%;
    background-color: #303446;
-
 }
 
 .titleContainer {
@@ -86,6 +86,7 @@
     flex-direction: column;
     align-items: center;
 }
+
 .title {
     margin:0;
 }
@@ -100,13 +101,14 @@
     font-size: 15px;
     background-color: aliceblue;
     margin-bottom: 10px;
+    position: relative;
+    width: 100%;
 }
 
 .listColor {
     height: 100px;
     width: 5px;
     background-color: black;
-
 }
 
 .todos {
@@ -124,6 +126,13 @@
 .taskInput {
     width: 274px;
     padding: 10px;
+}
+
+.closeContainer {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    font-size: 22px;
 }
 
 .textareaContainer {

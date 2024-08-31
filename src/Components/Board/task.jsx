@@ -1,7 +1,7 @@
 import styles from './Board.module.css'
 
 /* eslint-disable react/prop-types */
-function TaskComponent({status}) {
+function TaskComponent({status,title,description}) {
     const colorBar = {
         inComplete:'red',
         complete:'green',
@@ -13,11 +13,11 @@ function TaskComponent({status}) {
         <div className={styles.listColor} style={{backgroundColor:colorBar[status] }} ></div>
         <div className={styles.todos}>
             <div>
-                <p>Splash Screen</p>
-                <p>The book itself is surprisingly thin and it &apos;s</p>
+                <p>{title}</p>
+                <p>{description}</p>
             </div>
-            <div>
-                <ion-icon name="link-outline"></ion-icon>
+            <div className={styles.closeContainer} >
+                <ion-icon name="close-outline"  className={styles.close}></ion-icon>
             </div>
         </div>
     </div>

@@ -3,7 +3,7 @@ import TaskComponent from './task'
 
 /* eslint-disable react/prop-types */
 
-function BoardComponent({title,color}) {
+function BoardComponent({title,color,items}) {
   return (
     <div className = {styles.mainBoard}>
         <div className={styles.board}>
@@ -17,10 +17,9 @@ function BoardComponent({title,color}) {
                 </div>
             </div>
             <div className={styles.taskListContainer}>
-                <TaskComponent status='inComplete'/>
-                <TaskComponent status='reviewing'/>
-                <TaskComponent status='reviewing'/>
-                <TaskComponent status='reviewing'/>
+                {items.map((item,index) =>(
+                    <TaskComponent key={index} title={item.title} description={item.description} status={item.status}/>
+                ))}
             </div>
         </div>
     </div>
