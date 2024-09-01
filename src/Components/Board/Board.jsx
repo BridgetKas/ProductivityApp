@@ -36,68 +36,68 @@ function Board() {
   const [review , setReview] = useState([])
   const [complete, setComplete] = useState([])
 
-
-
   function isModalOpen() {
     setOpenModal(true)
-}
+  }
 
-function closeModal(){
-    setOpenModal(false)
-}
+  function closeModal(){
+      setOpenModal(false)
+  }
 
-function changeStatus(e) {
-    setStatus(e.target.value)
-}
+  function changeStatus(e) {
+      setStatus(e.target.value)
+  }
 
-function saveTask() {
-    switch (status) {
-      case 'inComplete':
-        setInComplete([
-          ...incomplete,
-          {
-            title:title,
-            description:description,
-            status:status,
-          }
-        ])
-        break;
-        case 'inprogress':
-        setInProgress([
-          ...inprogress,
-          {
-            title:title,
-            description:description,
-            status:status,
-          }
-        ])
-        break;
-        case 'reviewing':
-        setReview([
-          ...review,
-          {
-            title:title,
-            description:description,
-            status:status,
-          }
-        ])
-        break;
-        case 'complete':
-        setComplete([
-          ...complete,
-          {
-            title:title,
-            description:description,
-            status:status,
-          }
-        ])
-        break;
-        default:
-          console.log('hahahah')
-    }
-    setTitle('')
-    setDescription('')
-}
+  function saveTask() {
+      switch (status) {
+        case 'inComplete':
+          setInComplete([
+            ...incomplete,
+            {
+              title:title,
+              description:description,
+              status:status,
+            }
+          ])
+          break;
+          case 'inprogress':
+          setInProgress([
+            ...inprogress,
+            {
+              title:title,
+              description:description,
+              status:status,
+            }
+          ])
+          break;
+          case 'reviewing':
+          setReview([
+            ...review,
+            {
+              title:title,
+              description:description,
+              status:status,
+            }
+          ])
+          break;
+          case 'complete':
+          setComplete([
+            ...complete,
+            {
+              title:title,
+              description:description,
+              status:status,
+            }
+          ])
+          break;
+          default:
+            console.log('hahahah')
+      }
+      setTitle('')
+      setDescription('')
+  }
+
+ 
   return (
     <div>
       <div className={styles.features}>
@@ -131,13 +131,13 @@ function saveTask() {
         </div>
       </div>
       <div className={styles.mainBoardContainer}>
-        <BoardComponent title={boards[0].title} color={boards[0].color} items={incomplete}/>
+        <BoardComponent title={boards[0].title} color={boards[0].color} items={incomplete} />
         <BoardComponent title={boards[1].title} color={boards[1].color}  items={inprogress}/>
         <BoardComponent title={boards[2].title} color={boards[2].color}  items={review}/>
         <BoardComponent title={boards[3].title} color={boards[3].color}  items={complete}/>
       
-        <Modal show={openModal} onClose={closeModal} status={status}>
-          <div >
+        <Modal show={openModal} onClose={closeModal} status={status} >
+          <div  >
             <div className={styles.textareaContainer}>
               <input type='text' placeholder='Enter a title...' value={title} className={styles.taskInput} onChange={(e) => setTitle(e.target.value)}/>
               <textarea id="story" rows="5" cols="33" placeholder='Enter a description' className={styles.textarea} value={description} onChange={(e) => setDescription(e.target.value)}> </textarea>

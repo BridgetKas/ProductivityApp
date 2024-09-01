@@ -91,6 +91,10 @@
     margin:0;
 }
 
+.settings {
+    font-size:22px;
+}
+
 .taskList {
     padding: 10px;
     border-radius: 5px;
@@ -102,7 +106,7 @@
     background-color: aliceblue;
     margin-bottom: 10px;
     position: relative;
-    width: 100%;
+    width: 95%;
 }
 
 .listColor {
@@ -128,11 +132,12 @@
     padding: 10px;
 }
 
-.closeContainer {
+.editContainer {
     position: absolute;
     top: 5px;
     right: 5px;
     font-size: 22px;
+    cursor: pointer;
 }
 
 .textareaContainer {
@@ -156,7 +161,24 @@
     color: #fff;
 }
 
+/* menuTab */
+.menutabContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    color: black;
+}
 
+.boardTab {
+    cursor: pointer;
+}
+
+.tabCloseIcon {
+    font-size: 22px;
+    display: flex;
+    align-items:center;
+}
 @media(min-width:600px) {
     .mainBoard {
         width: 45%;
