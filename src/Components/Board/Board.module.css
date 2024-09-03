@@ -1,3 +1,5 @@
+/* BOARD CSS */
+
 .features {
     display: flex;
     align-items: center;
@@ -54,6 +56,9 @@
     justify-content: space-between;
 }
 
+
+/* Board Component CSS */
+
 .mainBoard {
     background-color: #3b3e52;
     padding: 10px;
@@ -80,13 +85,6 @@
     gap: 5px;
 }
 
-.taskListContainer {
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
 .title {
     margin:0;
 }
@@ -94,6 +92,37 @@
 .settings {
     font-size:22px;
 }
+
+.taskListContainer {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.eraseContainer {
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.clearBtn {
+    cursor:pointer;
+    background-color:#fff;
+    color:black;
+    border:1px solid black;
+}
+
+.deleteBtn {
+    cursor: pointer;
+    background-color: red;
+    color:#fff;
+    border: none;
+}
+
+
+/* TASK CSS */
 
 .taskList {
     padding: 10px;
@@ -161,24 +190,6 @@
     color: #fff;
 }
 
-/* menuTab */
-.menutabContainer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 20px;
-    color: black;
-}
-
-.boardTab {
-    cursor: pointer;
-}
-
-.tabCloseIcon {
-    font-size: 22px;
-    display: flex;
-    align-items:center;
-}
 @media(min-width:600px) {
     .mainBoard {
         width: 45%;

@@ -2,7 +2,7 @@
 import './modal.css';
 
 const colorBar = {
-  inComplete:'red',
+  incomplete:'red',
   complete:'green',
   inprogress:'orange',
   reviewing:'blue'

@@ -3,7 +3,7 @@ import styles from './Board.module.css'
 import {useState} from 'react'
 
 const colorBar = {
-    inComplete:'red',
+    incomplete:'red',
     complete:'green',
     inprogress:'orange',
     reviewing:'blue'
@@ -12,9 +12,9 @@ const colorBar = {
 /* eslint-disable react/prop-types */
 function TaskComponent({status,title,description,updateTask}) {
     const [openTask,setOpenTask] = useState(false)
-    const [titleTask,setTitleTask] = useState(title)
-    const [descriptionTask,setDescriptionTask] = useState(description)
-    const [taskstatus,setTaskStatus] = useState(status)
+    const [updatedTitle,setUpdatedTitle] = useState(title)
+    const [updatedDescription,setUpdatedDescription] = useState(description)
+    const [updatedStatus,setUpdatedStatus] = useState(status)
     // const [index,setIndex] = useState(0)
 
     function editingTask() {
@@ -26,13 +26,21 @@ function TaskComponent({status,title,description,updateTask}) {
     }
 
     function changeStatus(e) {
-        setTaskStatus(e.target.value)
+        setUpdatedStatus(e.target.value)
+    }
+
+    function _updateTask(){
+      updateTask(updatedTitle,updatedDescription,updatedStatus)
+      setUpdatedTitle('')
+      setUpdatedDescription('')
+      setOpenTask(false)
+      
     }
     
   return (
     <>
         <div className={styles.taskList}>
-            <div className={styles.listColor} style={{backgroundColor:colorBar[taskstatus] }} ></div>
+            <div className={styles.listColor} style={{backgroundColor:colorBar[status] }} ></div>
             <div className={styles.todos}>
                 <div>
                     <p>{title}</p>
@@ -44,22 +52,42 @@ function TaskComponent({status,title,description,updateTask}) {
             </div>
         </div>
         
-        <Modal show={openTask} onClose={closeTask} status={taskstatus} >
+        <Modal show={openTask} onClose={closeTask} status={updatedStatus} >
           <div  >
             <div className={styles.textareaContainer}>
-              <input type='text' placeholder='Enter a title...' value={titleTask} className={styles.taskInput} onChange={(e) => setTitleTask(e.target.value)}/>
-              <textarea id="story" rows="5" cols="33" placeholder='Enter a description' className={styles.textarea} value={descriptionTask} onChange={(e) => setDescriptionTask(e.target.value)}> </textarea>
+              <input 
+                type='text' 
+                placeholder='Enter a title...'
+                value={updatedTitle} 
+                className={styles.taskInput} 
+                onChange={(e) => setUpdatedTitle(e.target.value)}
+              />
+              <textarea 
+                id="story" 
+                rows="5"
+                cols="33" 
+                placeholder='Enter a description' 
+                className={styles.textarea}
+                value={updatedDescription} 
+                onChange={(e) => setUpdatedDescription(e.target.value)}
+              > 
+              </textarea>
             </div>
             <div>
-              <select className={styles.selectarea}  value={taskstatus} onChange={changeStatus}>
-                <option value="inComplete" >Incomplete</option>
+              <select className={styles.selectarea}  value={updatedStatus} onChange={changeStatus}>
+                <option value="incomplete" >Incomplete</option>
                 <option value="inprogress">In progress</option>
                 <option value="reviewing">Reviewing</option>
                 <option value="complete">Complete</option>
               </select>
             </div>
             <div className='modalContainer'>
-                <button className={styles.saveBtn} onClick={updateTask} disabled={!title || !description}>Save</button>
+                <button className={styles.saveBtn}
+                  onClick={_updateTask}  
+                  disabled={!title || !description}
+                >
+                  Update 
+                </button>
             </div>
           </div>
         </Modal>

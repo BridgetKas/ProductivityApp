@@ -5,7 +5,7 @@ import {useState} from 'react'
 
 /* eslint-disable react/prop-types */
 
-function BoardComponent({title,color,items}) {
+function BoardComponent({title,color,items, updateTask,clearBoard,deleteBoard}) {
     const [openTabMenu,setOpenTabMenu] = useState(false)
     const length = items.length
 
@@ -16,10 +16,6 @@ function BoardComponent({title,color,items}) {
   
     function closeTabMenu() {
       setOpenTabMenu(false)
-    }
-
-    function deleteBoard() {
-        console.log('aya')
     }
 
     return (
@@ -37,13 +33,19 @@ function BoardComponent({title,color,items}) {
                 </div>
                 <div className={styles.taskListContainer}>
                     {items.map((item,index) =>(
-                        <TaskComponent key={index} title={item.title} description={item.description} status={item.status} />
+                        <TaskComponent 
+                            key={index} title={item.title} 
+                            description={item.description} 
+                            status={item.status} 
+                            updateTask={(uT,uD,uS)=>updateTask(index,uT,uD,uS)}
+                        />
                     ))}
                 </div>
             </div>
             <Modal show={openTabMenu} onClose={closeTabMenu}>
-                <div >
-                    <a onClick={deleteBoard} className={styles.boardTab}>Delete Board</a>
+                <div className={styles.eraseContainer}>
+                    <button onClick={clearBoard} className={styles.clearBtn}>Clear Board</button>
+                    <button onClick={deleteBoard} className={styles.deleteBtn}>Delete Board</button>
                 </div>
             </Modal>
         </div>

@@ -1,4 +1,4 @@
-import BoardComponent from "./boardContainer"
+import BoardComponent from "./boardcomponent"
 import styles from './Board.module.css'
 import { useState } from "react"
 import Modal from "../modal/modalComponent"
@@ -6,35 +6,36 @@ import { FaRegCircle } from "react-icons/fa";
 
 
 
-const boards = [
+const taskBoards = [
   {
     title:'Backlog',
-    color:'red'
+    color:'red',
+    status:'incomplete'
   },
   {
     title:'In progress',
-    color:'orange'
+    color:'orange',
+    status:'inprogress'
   },
   {
     title:'Review',
-    color:'blue'
+    color:'blue',
+    status:'reviewing'
   },
   {
     title:'Done',
-    color:'green'
+    color:'green',
+    status:'complete'
   }
 ]
 
 function Board() {
-  // const [board,setBoard] = useState(boards)
   const [openModal,setOpenModal] = useState(false)
   const [title,setTitle] = useState('')
-  const [status,setStatus] = useState('inComplete')
+  const [status,setStatus] = useState('incomplete')
   const [description,setDescription] = useState('')
-  const [incomplete , setInComplete] = useState([])
-  const [inprogress , setInProgress] = useState([])
-  const [review , setReview] = useState([])
-  const [complete, setComplete] = useState([])
+  const [task, setTask] = useState([])
+  const [boards,setBoards] = useState(taskBoards)
 
   function isModalOpen() {
     setOpenModal(true)
@@ -49,55 +50,45 @@ function Board() {
   }
 
   function saveTask() {
-      switch (status) {
-        case 'inComplete':
-          setInComplete([
-            ...incomplete,
-            {
-              title:title,
-              description:description,
-              status:status,
-            }
-          ])
-          break;
-          case 'inprogress':
-          setInProgress([
-            ...inprogress,
-            {
-              title:title,
-              description:description,
-              status:status,
-            }
-          ])
-          break;
-          case 'reviewing':
-          setReview([
-            ...review,
-            {
-              title:title,
-              description:description,
-              status:status,
-            }
-          ])
-          break;
-          case 'complete':
-          setComplete([
-            ...complete,
-            {
-              title:title,
-              description:description,
-              status:status,
-            }
-          ])
-          break;
-          default:
-            console.log('hahahah')
+     setTask([
+      ...task,
+      {
+        title:title,
+        description:description,
+        status:status
       }
+     ])
+     
       setTitle('')
       setDescription('')
+      setStatus('incomplete')
   }
 
- 
+
+  function updateTask(index ,uT,uD,uS) {
+    setTask([
+      ...task,
+      {
+        title:uT,
+        description:uD,
+        status:uS
+      }
+     ])
+    
+  }
+
+  function clearBoard(status){
+   const newBoardsArray =  task.filter((taskItem) => (status !== taskItem.status))
+   setTask(newBoardsArray)
+  }
+
+  function deleteBoard(index) {
+    clearBoard(status)
+    const boardsArray = boards.filter((item,itemIndex) => (index !== itemIndex))
+    setBoards(boardsArray)
+  } 
+
+
   return (
     <div>
       <div className={styles.features}>
@@ -131,27 +122,45 @@ function Board() {
         </div>
       </div>
       <div className={styles.mainBoardContainer}>
-        <BoardComponent title={boards[0].title} color={boards[0].color} items={incomplete} />
-        <BoardComponent title={boards[1].title} color={boards[1].color}  items={inprogress}/>
-        <BoardComponent title={boards[2].title} color={boards[2].color}  items={review}/>
-        <BoardComponent title={boards[3].title} color={boards[3].color}  items={complete}/>
+        {boards.map((board,index) =>(
+          <BoardComponent 
+          key ={index} 
+          title={board.title} 
+          color={board.color}  
+          status={board.status}  
+          items={task.filter((item) =>(item.status === board.status))}
+          updateTask={(index ,uT,uD,uS) => updateTask(index ,uT,uD,uS)}
+          clearBoard={() => clearBoard(board.status)}
+          deleteBoard={() => deleteBoard(index)}
+          />
+        ))}
       
         <Modal show={openModal} onClose={closeModal} status={status} >
           <div  >
             <div className={styles.textareaContainer}>
-              <input type='text' placeholder='Enter a title...' value={title} className={styles.taskInput} onChange={(e) => setTitle(e.target.value)}/>
-              <textarea id="story" rows="5" cols="33" placeholder='Enter a description' className={styles.textarea} value={description} onChange={(e) => setDescription(e.target.value)}> </textarea>
+              <input type='text' placeholder='Enter a title...' value={title} 
+                className={styles.taskInput} onChange={(e) => setTitle(e.target.value)}
+              />
+              <textarea id="story" rows="5" cols="33" placeholder='Enter a description' 
+                className={styles.textarea} value={description}
+                onChange={(e) => setDescription(e.target.value)}
+              > 
+              </textarea>
             </div>
             <div>
               <select className={styles.selectarea}  value={status} onChange={changeStatus}>
-                <option value="inComplete" >Incomplete</option>
+                <option value="incomplete" >Incomplete</option>
                 <option value="inprogress">In progress</option>
                 <option value="reviewing">Reviewing</option>
                 <option value="complete">Complete</option>
               </select>
             </div>
             <div className='modalContainer'>
-                <button className={styles.saveBtn} onClick={saveTask} disabled={!title || !description}>Save</button>
+                <button className={styles.saveBtn} onClick={saveTask} 
+                disabled={!title || !description}
+                >
+                  Save
+                </button>
             </div>
           </div>
         </Modal>
