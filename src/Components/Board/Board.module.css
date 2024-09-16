@@ -53,7 +53,7 @@
     display: flex;
     align-items: flex-start;
     flex-wrap: wrap;
-    justify-content: space-between;
+    gap:10px;
 }
 
 
@@ -167,8 +167,13 @@
     right: 5px;
     font-size: 22px;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
-
+ .delete {
+    color:red;
+ }
 .textareaContainer {
     display: flex;
     flex-direction: column;
@@ -188,6 +193,16 @@
 
 .saveBtn {
     color: #fff;
+}
+
+/* create board css */
+
+.boardContainer {
+    display: flex;
+    flex-direction:column;
+    align-items:center;
+    gap: 10px;
+    margin-bottom: 10px;
 }
 
 @media(min-width:600px) {

@@ -3,6 +3,8 @@ import styles from './Board.module.css'
 import { useState } from "react"
 import Modal from "../modal/modalComponent"
 import { FaRegCircle } from "react-icons/fa";
+import { BOARD_KEY, generateId, saveToLocalStorage } from "../../utilis";
+import { TASK_KEY } from "../../utilis";
 
 
 
@@ -10,22 +12,26 @@ const taskBoards = [
   {
     title:'Backlog',
     color:'red',
-    status:'incomplete'
+    status:'incomplete',
+    value:'incomplete'
   },
   {
     title:'In progress',
     color:'orange',
-    status:'inprogress'
+    status:'inprogress',
+    value:'inprogress'
   },
   {
     title:'Review',
     color:'blue',
-    status:'reviewing'
+    status:'reviewing',
+    value:'reviewing'
   },
   {
     title:'Done',
     color:'green',
-    status:'complete'
+    status:'complete',
+    value:'complete'
   }
 ]
 
@@ -34,8 +40,13 @@ function Board() {
   const [title,setTitle] = useState('')
   const [status,setStatus] = useState('incomplete')
   const [description,setDescription] = useState('')
-  const [task, setTask] = useState([])
-  const [boards,setBoards] = useState(taskBoards)
+  const [task, setTask] = useState(localStorage.getItem (TASK_KEY) ? JSON.parse(localStorage.getItem(TASK_KEY)) : [])
+  const [boards,setBoards] = useState(localStorage.getItem(BOARD_KEY) ? JSON.parse(localStorage.getItem(BOARD_KEY)) : taskBoards)
+  const [boardTitle,setBoardTitle] = useState('')
+  const [boardColor,setBoardColor] = useState('')
+  const [boardStatus,setBoardStatus] = useState('')
+  const [openBoard,setOpenBoard] = useState('')
+
 
   function isModalOpen() {
     setOpenModal(true)
@@ -50,15 +61,18 @@ function Board() {
   }
 
   function saveTask() {
-     setTask([
+     const todoTasks = [
       ...task,
       {
         title:title,
         description:description,
-        status:status
+        status:status,
+        id:generateId()
       }
-     ])
-     
+
+     ]
+     setTask(todoTasks)
+     saveToLocalStorage(TASK_KEY, todoTasks)
       setTitle('')
       setDescription('')
       setStatus('incomplete')
@@ -66,28 +80,66 @@ function Board() {
 
 
   function updateTask(index ,uT,uD,uS) {
-    setTask([
+    const taskArray = [
       ...task,
       {
         title:uT,
         description:uD,
         status:uS
       }
-     ])
+    ]
+    setTask(taskArray)
     
   }
-
   function clearBoard(status){
    const newBoardsArray =  task.filter((taskItem) => (status !== taskItem.status))
+   console.log(newBoardsArray)
    setTask(newBoardsArray)
+   saveToLocalStorage(TASK_KEY,newBoardsArray)
+
   }
 
   function deleteBoard(index) {
     clearBoard(status)
     const boardsArray = boards.filter((item,itemIndex) => (index !== itemIndex))
     setBoards(boardsArray)
+    saveToLocalStorage(BOARD_KEY,boardsArray)
   } 
+  
+  function addBoard() {
+    setOpenBoard(true)
+ 
+  }
 
+  function closeBoard() {
+    setOpenBoard(false)
+  }
+
+  function saveBoard() {
+
+    const arrayBoards = [
+      ...boards,
+      {
+        title:boardTitle,
+        color:boardColor,
+        status:boardStatus
+      }
+    ]
+    setBoards(arrayBoards)
+    saveToLocalStorage(BOARD_KEY,arrayBoards)
+    setBoardTitle('')
+    setBoardColor('')
+    setBoardStatus('')
+    closeBoard()
+  }
+
+  function deletingTask(id) {
+    const newTasksArray = task.filter((item) => {
+     return  item.id !== id
+    })
+    setTask(newTasksArray)
+    saveToLocalStorage(TASK_KEY,newTasksArray)
+  }
 
   return (
     <div>
@@ -117,7 +169,7 @@ function Board() {
               <button onClick={isModalOpen}>Add a Task</button>
           </div>
           <div className={styles.btnContainer}>
-              <button className={styles.button}>Add a Board</button>
+              <button className={styles.button} onClick={addBoard}>Add a Board</button>
           </div>
         </div>
       </div>
@@ -127,11 +179,13 @@ function Board() {
           key ={index} 
           title={board.title} 
           color={board.color}  
-          status={board.status}  
+          status={board.status} 
+          value={board.value} 
           items={task.filter((item) =>(item.status === board.status))}
           updateTask={(index ,uT,uD,uS) => updateTask(index ,uT,uD,uS)}
           clearBoard={() => clearBoard(board.status)}
           deleteBoard={() => deleteBoard(index)}
+          deletingTask={(id) => deletingTask(id)}
           />
         ))}
       
@@ -149,15 +203,38 @@ function Board() {
             </div>
             <div>
               <select className={styles.selectarea}  value={status} onChange={changeStatus}>
-                <option value="incomplete" >Incomplete</option>
-                <option value="inprogress">In progress</option>
-                <option value="reviewing">Reviewing</option>
-                <option value="complete">Complete</option>
+                {
+                  boards.map((board,index) =>(<option value={board.status} key={index}> 
+                  {board.status}</option>))
+                }
+              
               </select>
             </div>
             <div className='modalContainer'>
                 <button className={styles.saveBtn} onClick={saveTask} 
                 disabled={!title || !description}
+                >
+                  Save
+                </button>
+            </div>
+          </div>
+        </Modal>
+        <Modal show={openBoard} onClose={closeBoard} >
+          <div>
+            <div className={styles.boardContainer}>
+              <input type='text' placeholder='Enter a Board title...' value={boardTitle} 
+                className={styles.taskInput} onChange={(e) => setBoardTitle(e.target.value)}
+              />
+              <input type='text' placeholder='Enter  Board color...' value={boardColor} 
+                className={styles.taskInput} onChange={(e) => setBoardColor(e.target.value)}
+              />
+              <input type='text' placeholder='Enter  Board status...' value={boardStatus} 
+                className={styles.taskInput} onChange={(e) => setBoardStatus(e.target.value)}
+              />
+            </div>
+            <div className='modalContainer'>
+                <button className={styles.saveBtn} onClick={saveBoard} 
+                disabled={!boardTitle || !boardColor || !boardStatus}
                 >
                   Save
                 </button>

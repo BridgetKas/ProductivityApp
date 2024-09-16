@@ -10,7 +10,7 @@ const colorBar = {
 }
 
 /* eslint-disable react/prop-types */
-function TaskComponent({status,title,description,updateTask}) {
+function TaskComponent({ id,status,title,description,updateTask,passDeletingTask}) {
     const [openTask,setOpenTask] = useState(false)
     const [updatedTitle,setUpdatedTitle] = useState(title)
     const [updatedDescription,setUpdatedDescription] = useState(description)
@@ -36,18 +36,22 @@ function TaskComponent({status,title,description,updateTask}) {
       setOpenTask(false)
       
     }
-    
+
+  
   return (
     <>
-        <div className={styles.taskList}>
-            <div className={styles.listColor} style={{backgroundColor:colorBar[status] }} ></div>
+        <div className={styles.taskList} >
+            <div className={styles.listColor} style={{backgroundColor:colorBar[status]}} ></div>
             <div className={styles.todos}>
                 <div>
                     <p>{title}</p>
                     <p>{description}</p>
                 </div>
                 <div className={styles.editContainer} >
-                    <ion-icon name="ellipsis-vertical-outline" onClick={editingTask}></ion-icon>
+                    <ion-icon name="pencil-outline" onClick={editingTask}></ion-icon>
+                    <div className={styles.delete}>
+                      <ion-icon name="trash-outline" onClick={ () => passDeletingTask(id)} ></ion-icon>
+                    </div>
                 </div>
             </div>
         </div>
