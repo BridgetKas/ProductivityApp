@@ -12,3 +12,30 @@ export function saveToLocalStorage(key,value){
 }
 
 
+export const taskBoards = [
+  {
+    title:'Backlog',
+    color:'red',
+    status:'incomplete',
+    value:'incomplete'
+  },
+  {
+    title:'In progress',
+    color:'orange',
+    status:'inprogress',
+    value:'inprogress'
+  },
+  {
+    title:'Review',
+    color:'blue',
+    status:'reviewing',
+    value:'reviewing'
+  },
+  {
+    title:'Done',
+    color:'green',
+    status:'complete',
+    value:'complete'
+  }
+]
+

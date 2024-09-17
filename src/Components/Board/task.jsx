@@ -1,6 +1,7 @@
 import Modal from '../modal/modalComponent'
 import styles from './Board.module.css'
 import {useState} from 'react'
+// import { taskBoards } from '../../utilis'
 
 const colorBar = {
     incomplete:'red',
@@ -10,7 +11,7 @@ const colorBar = {
 }
 
 /* eslint-disable react/prop-types */
-function TaskComponent({ id,status,title,description,updateTask,passDeletingTask}) {
+function TaskComponent({ id,status,title,description,updateTask,passDeletingTask,boardsArray}) {
     const [openTask,setOpenTask] = useState(false)
     const [updatedTitle,setUpdatedTitle] = useState(title)
     const [updatedDescription,setUpdatedDescription] = useState(description)
@@ -30,11 +31,10 @@ function TaskComponent({ id,status,title,description,updateTask,passDeletingTask
     }
 
     function _updateTask(){
-      updateTask(updatedTitle,updatedDescription,updatedStatus)
+      updateTask(updatedTitle,updatedDescription,updatedStatus,id)
       setUpdatedTitle('')
       setUpdatedDescription('')
       setOpenTask(false)
-      
     }
 
   
@@ -79,10 +79,9 @@ function TaskComponent({ id,status,title,description,updateTask,passDeletingTask
             </div>
             <div>
               <select className={styles.selectarea}  value={updatedStatus} onChange={changeStatus}>
-                <option value="incomplete" >Incomplete</option>
-                <option value="inprogress">In progress</option>
-                <option value="reviewing">Reviewing</option>
-                <option value="complete">Complete</option>
+                 {boardsArray.map((board,index) => ( 
+                  <option value={board.status} key ={index}>{board.title}</option>
+                ))}
               </select>
             </div>
             <div className='modalContainer'>

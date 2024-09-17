@@ -5,7 +5,7 @@ import {useState} from 'react'
 
 /* eslint-disable react/prop-types */
 
-function BoardComponent({title,color,items, updateTask,clearBoard,deleteBoard,deletingTask}) {
+function BoardComponent({title,color,items, updateTask,clearBoard,deleteBoard,deletingTask,boardsArray}) {
     const [openTabMenu,setOpenTabMenu] = useState(false)
     const length = items.length
 
@@ -34,15 +34,16 @@ function BoardComponent({title,color,items, updateTask,clearBoard,deleteBoard,de
                     </div>
                 </div>
                 <div className={styles.taskListContainer}>
-                    {items.map((item,index) =>(
+                    {items.map((item) =>(
                         <TaskComponent 
                             key={item.id} 
                             title={item.title} 
                             description={item.description} 
                             id={item.id}
                             status={item.status} 
-                            updateTask={(uT,uD,uS)=>updateTask(index,uT,uD,uS)}
+                            updateTask={(uT,uD,uS,id)=>updateTask(uT,uD,uS,id)}
                             passDeletingTask={(id) => deletingTask(id)}
+                            boardsArray={boardsArray}
                         />
                     ))}
                 </div>

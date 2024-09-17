@@ -5,36 +5,36 @@ import Modal from "../modal/modalComponent"
 import { FaRegCircle } from "react-icons/fa";
 import { BOARD_KEY, generateId, saveToLocalStorage } from "../../utilis";
 import { TASK_KEY } from "../../utilis";
+import { taskBoards } from "../../utilis";
 
 
 
-const taskBoards = [
-  {
-    title:'Backlog',
-    color:'red',
-    status:'incomplete',
-    value:'incomplete'
-  },
-  {
-    title:'In progress',
-    color:'orange',
-    status:'inprogress',
-    value:'inprogress'
-  },
-  {
-    title:'Review',
-    color:'blue',
-    status:'reviewing',
-    value:'reviewing'
-  },
-  {
-    title:'Done',
-    color:'green',
-    status:'complete',
-    value:'complete'
-  }
-]
-
+// const taskBoards = [
+//   {
+//     title:'Backlog',
+//     color:'red',
+//     status:'incomplete',
+//     value:'incomplete'
+//   },
+//   {
+//     title:'In progress',
+//     color:'orange',
+//     status:'inprogress',
+//     value:'inprogress'
+//   },
+//   {
+//     title:'Review',
+//     color:'blue',
+//     status:'reviewing',
+//     value:'reviewing'
+//   },
+//   {
+//     title:'Done',
+//     color:'green',
+//     status:'complete',
+//     value:'complete'
+//   }
+// ]
 function Board() {
   const [openModal,setOpenModal] = useState(false)
   const [title,setTitle] = useState('')
@@ -46,7 +46,6 @@ function Board() {
   const [boardColor,setBoardColor] = useState('')
   const [boardStatus,setBoardStatus] = useState('')
   const [openBoard,setOpenBoard] = useState('')
-
 
   function isModalOpen() {
     setOpenModal(true)
@@ -79,18 +78,24 @@ function Board() {
   }
 
 
-  function updateTask(index ,uT,uD,uS) {
-    const taskArray = [
-      ...task,
-      {
-        title:uT,
-        description:uD,
-        status:uS
+  function updateTask(uT,uD,uS,id) {
+
+    const taskArray = task.map((item) => {
+      if(item.id === id) {
+        return {
+          title:uT,
+          description:uD,
+          status:uS,
+          id:id
+        }
+      }else {
+       return  item
       }
-    ]
+    })
     setTask(taskArray)
-    
+    saveToLocalStorage(TASK_KEY,taskArray)
   }
+
   function clearBoard(status){
    const newBoardsArray =  task.filter((taskItem) => (status !== taskItem.status))
    console.log(newBoardsArray)
@@ -141,6 +146,7 @@ function Board() {
     saveToLocalStorage(TASK_KEY,newTasksArray)
   }
 
+
   return (
     <div>
       <div className={styles.features}>
@@ -186,6 +192,7 @@ function Board() {
           clearBoard={() => clearBoard(board.status)}
           deleteBoard={() => deleteBoard(index)}
           deletingTask={(id) => deletingTask(id)}
+          boardsArray={boards}
           />
         ))}
       
