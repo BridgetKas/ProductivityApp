@@ -1,0 +1,31 @@
+.mainSettingsContainer {
+    padding: 20px;
+    text-align: left;
+}
+
+.settings {
+    text-align: left;
+}
+
+.settingsContainer {
+    display:flex;
+    flex-direction: row;
+    align-items: left;
+    gap: 30px;
+}
+
+.setting {
+    font-size:20px;
+}
+
+.removeSetting {
+    font-size: 18px;
+    color: red;
+    font-weight: bold;
+    margin: 0;
+}
+
+.erase {
+    font-size: 18px;
+    margin: 8px 0;
+}

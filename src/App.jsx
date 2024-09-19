@@ -2,6 +2,7 @@ import './App.css'
 import { createBrowserRouter,RouterProvider} from "react-router-dom";
 import LayoutPage from './layOut/layoutPage';
 import Board from './Components/Board/Board';
+import SettingsComponent from './Components/Settingsf/Settings';
 
 
 
@@ -15,6 +16,19 @@ const router = createBrowserRouter([
         index: true,
         element: <Board/>,
       },
+      {
+        path:'tasks',
+        element:<Board/>
+
+      },
+      {
+        path:'settings',
+        element:<SettingsComponent/>
+      },
+      {
+        path:'exit',
+        element:'four'
+      }
       
     ]
   },

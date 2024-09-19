@@ -5,36 +5,35 @@ import Modal from "../modal/modalComponent"
 import { FaRegCircle } from "react-icons/fa";
 import { BOARD_KEY, generateId, saveToLocalStorage } from "../../utilis";
 import { TASK_KEY } from "../../utilis";
-import { taskBoards } from "../../utilis";
 
 
 
-// const taskBoards = [
-//   {
-//     title:'Backlog',
-//     color:'red',
-//     status:'incomplete',
-//     value:'incomplete'
-//   },
-//   {
-//     title:'In progress',
-//     color:'orange',
-//     status:'inprogress',
-//     value:'inprogress'
-//   },
-//   {
-//     title:'Review',
-//     color:'blue',
-//     status:'reviewing',
-//     value:'reviewing'
-//   },
-//   {
-//     title:'Done',
-//     color:'green',
-//     status:'complete',
-//     value:'complete'
-//   }
-// ]
+const taskBoards = [
+  {
+    title:'Backlog',
+    color:'red',
+    status:'incomplete',
+    value:'incomplete'
+  },
+  {
+    title:'In progress',
+    color:'orange',
+    status:'inprogress',
+    value:'inprogress'
+  },
+  {
+    title:'Review',
+    color:'blue',
+    status:'reviewing',
+    value:'reviewing'
+  },
+  {
+    title:'Done',
+    color:'green',
+    status:'complete',
+    value:'complete'
+  }
+]
 function Board() {
   const [openModal,setOpenModal] = useState(false)
   const [title,setTitle] = useState('')
@@ -193,7 +192,8 @@ function Board() {
           deleteBoard={() => deleteBoard(index)}
           deletingTask={(id) => deletingTask(id)}
           boardsArray={boards}
-          />
+          taskColor={board.color}
+          /> 
         ))}
       
         <Modal show={openModal} onClose={closeModal} status={status} >

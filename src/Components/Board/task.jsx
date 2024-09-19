@@ -1,17 +1,16 @@
 import Modal from '../modal/modalComponent'
 import styles from './Board.module.css'
 import {useState} from 'react'
-// import { taskBoards } from '../../utilis'
 
-const colorBar = {
-    incomplete:'red',
-    complete:'green',
-    inprogress:'orange',
-    reviewing:'blue'
-}
+// const colorBar = {
+//     incomplete:'red',
+//     complete:'green',
+//     inprogress:'orange',
+//     reviewing:'blue'
+// }
 
 /* eslint-disable react/prop-types */
-function TaskComponent({ id,status,title,description,updateTask,passDeletingTask,boardsArray}) {
+function TaskComponent({ id,status,title,description,updateTask,passDeletingTask,boardsArray,taskColor = 'black'}) {
     const [openTask,setOpenTask] = useState(false)
     const [updatedTitle,setUpdatedTitle] = useState(title)
     const [updatedDescription,setUpdatedDescription] = useState(description)
@@ -36,12 +35,11 @@ function TaskComponent({ id,status,title,description,updateTask,passDeletingTask
       setUpdatedDescription('')
       setOpenTask(false)
     }
-
   
   return (
     <>
         <div className={styles.taskList} >
-            <div className={styles.listColor} style={{backgroundColor:colorBar[status]}} ></div>
+            <div className={styles.listColor} style={{backgroundColor:`${taskColor}`}} ></div>
             <div className={styles.todos}>
                 <div>
                     <p>{title}</p>
