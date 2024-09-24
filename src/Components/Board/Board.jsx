@@ -71,11 +71,11 @@ function reducerFunction(state,action) {
     }
 
     case 'clear_board': {
-      const newBoardsArray =  state.boards.filter((taskItem) => (action.status !== taskItem.status))
-      saveToLocalStorage(TASK_KEY,newBoardsArray)
+      const newTasksArray =  state.tasks.filter((taskItem) => (action.status !== taskItem.status))
+      saveToLocalStorage(TASK_KEY,newTasksArray)
       return {
         ...state,
-        boards: newBoardsArray
+        tasks: newTasksArray
       }
     }
 
@@ -87,6 +87,7 @@ function reducerFunction(state,action) {
         boards: boardsArray
       }
     }
+    
     case 'updated_task': {
       const taskArray = state.tasks.map((item) => {
         if(item.id === action.id) {
@@ -97,7 +98,7 @@ function reducerFunction(state,action) {
             id:action.id
           }
         }else {
-        return  item
+          return  item
         }
       })
       saveToLocalStorage(TASK_KEY,taskArray)
@@ -177,7 +178,7 @@ function Board() {
     )
   }
 
-  function clearBoard( status){
+  function clearBoard(status){
     dispatch({
       type:'clear_board',
       status:status
