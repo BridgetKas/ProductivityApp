@@ -86,9 +86,7 @@ function reducerFunction(state,action) {
         ...state,
         boards: boardsArray
       }
-    
     }
-
     case 'updated_task': {
       const taskArray = state.tasks.map((item) => {
         if(item.id === action.id) {
