@@ -1,6 +1,6 @@
 import BoardComponent from "./boardcomponent"
 import styles from './Board.module.css'
-import { useState } from "react"
+import { useState ,useReducer} from "react"
 import Modal from "../modal/modalComponent"
 import { FaRegCircle } from "react-icons/fa";
 import { BOARD_KEY, generateId, saveToLocalStorage } from "../../utilis";
@@ -34,17 +34,111 @@ const taskBoards = [
     value:'complete'
   }
 ]
+
+function reducerFunction(state,action) {
+  switch(action.type) {
+    case 'added_task': {
+      const todoTasks = [
+        ...state.tasks,
+        {
+          title:action.title,
+          description:action.description,
+          status:action.status,
+          id:action.id
+        }                     
+      ]
+     saveToLocalStorage(TASK_KEY, todoTasks)
+      return {
+        ...state,
+        tasks: todoTasks
+      }
+    }
+
+    case 'added_board': {
+      const arrayBoards = [
+        ...state.boards,
+        {
+          title:action.title,
+          color:action.color,
+          status:action.status
+        }
+      ]
+      saveToLocalStorage(BOARD_KEY,arrayBoards)
+      return {
+        ...state,
+        boards: arrayBoards
+      }
+    }
+
+    case 'clear_board': {
+      const newBoardsArray =  state.boards.filter((taskItem) => (action.status !== taskItem.status))
+      saveToLocalStorage(TASK_KEY,newBoardsArray)
+      return {
+        ...state,
+        boards: newBoardsArray
+      }
+    }
+
+    case 'delete_board': {
+      const boardsArray = state.boards.filter((item,itemIndex) => (action.index !== itemIndex))
+      saveToLocalStorage(BOARD_KEY,boardsArray)
+      return {
+        ...state,
+        boards: boardsArray
+      }
+    
+    }
+
+    case 'updated_task': {
+      const taskArray = state.tasks.map((item) => {
+        if(item.id === action.id) {
+          return {
+            title:action.title,
+            description:action.description,
+            status:action.status,
+            id:action.id
+          }
+        }else {
+        return  item
+        }
+      })
+      saveToLocalStorage(TASK_KEY,taskArray)
+      return {
+        ...state,
+        tasks:taskArray
+      }
+    }
+
+    case 'deleting_task': {
+      const newTasksArray = state.tasks.filter((item) => {
+     return  item.id !== action.id
+    })
+    saveToLocalStorage(TASK_KEY,newTasksArray)
+      return {
+        ...state,
+        tasks:newTasksArray
+      }
+    }
+  }
+}
+
 function Board() {
   const [openModal,setOpenModal] = useState(false)
   const [title,setTitle] = useState('')
   const [status,setStatus] = useState('incomplete')
   const [description,setDescription] = useState('')
-  const [task, setTask] = useState(localStorage.getItem (TASK_KEY) ? JSON.parse(localStorage.getItem(TASK_KEY)) : [])
-  const [boards,setBoards] = useState(localStorage.getItem(BOARD_KEY) ? JSON.parse(localStorage.getItem(BOARD_KEY)) : taskBoards)
+  // const [task, setTask] = useState(localStorage.getItem (TASK_KEY) ? JSON.parse(localStorage.getItem(TASK_KEY)) : [])
+  // const [boards,setBoards] = useState(localStorage.getItem(BOARD_KEY) ? JSON.parse(localStorage.getItem(BOARD_KEY)) : taskBoards)
   const [boardTitle,setBoardTitle] = useState('')
   const [boardColor,setBoardColor] = useState('')
   const [boardStatus,setBoardStatus] = useState('')
   const [openBoard,setOpenBoard] = useState('')
+
+  const [state,dispatch] = useReducer(reducerFunction , {
+    boards: localStorage.getItem(BOARD_KEY) ? JSON.parse(localStorage.getItem(BOARD_KEY)) : taskBoards,
+    tasks:localStorage.getItem (TASK_KEY) ? JSON.parse(localStorage.getItem(TASK_KEY)) : []
+  })
+
 
   function isModalOpen() {
     setOpenModal(true)
@@ -59,55 +153,45 @@ function Board() {
   }
 
   function saveTask() {
-     const todoTasks = [
-      ...task,
-      {
-        title:title,
-        description:description,
-        status:status,
-        id:generateId()
-      }
-
-     ]
-     setTask(todoTasks)
-     saveToLocalStorage(TASK_KEY, todoTasks)
-      setTitle('')
-      setDescription('')
-      setStatus('incomplete')
+    dispatch ({
+      type:'added_task',
+      title:title,
+      description:description,
+      status:status,
+      id:generateId()
+    })
+    setTitle('')
+    setDescription('')
+    setStatus('incomplete')
+    closeModal()
   }
 
 
   function updateTask(uT,uD,uS,id) {
-
-    const taskArray = task.map((item) => {
-      if(item.id === id) {
-        return {
-          title:uT,
-          description:uD,
-          status:uS,
-          id:id
-        }
-      }else {
-       return  item
+    dispatch(
+      {
+        type:'updated_task',
+        title:uT,
+        description:uD,
+        status:uS,
+        id:id
       }
-    })
-    setTask(taskArray)
-    saveToLocalStorage(TASK_KEY,taskArray)
+    )
   }
 
-  function clearBoard(status){
-   const newBoardsArray =  task.filter((taskItem) => (status !== taskItem.status))
-   console.log(newBoardsArray)
-   setTask(newBoardsArray)
-   saveToLocalStorage(TASK_KEY,newBoardsArray)
-
+  function clearBoard( status){
+    dispatch({
+      type:'clear_board',
+      status:status
+    })
   }
 
   function deleteBoard(index) {
     clearBoard(status)
-    const boardsArray = boards.filter((item,itemIndex) => (index !== itemIndex))
-    setBoards(boardsArray)
-    saveToLocalStorage(BOARD_KEY,boardsArray)
+    dispatch({
+      type:'delete_board',
+      index:index
+    })
   } 
   
   function addBoard() {
@@ -120,17 +204,14 @@ function Board() {
   }
 
   function saveBoard() {
-
-    const arrayBoards = [
-      ...boards,
+    dispatch (
       {
+        type:'added_board',
         title:boardTitle,
         color:boardColor,
         status:boardStatus
       }
-    ]
-    setBoards(arrayBoards)
-    saveToLocalStorage(BOARD_KEY,arrayBoards)
+    )
     setBoardTitle('')
     setBoardColor('')
     setBoardStatus('')
@@ -138,11 +219,13 @@ function Board() {
   }
 
   function deletingTask(id) {
-    const newTasksArray = task.filter((item) => {
-     return  item.id !== id
-    })
-    setTask(newTasksArray)
-    saveToLocalStorage(TASK_KEY,newTasksArray)
+    dispatch (
+      {
+        type:'deleting_task',
+        id:id
+      }
+    )
+
   }
 
 
@@ -179,19 +262,19 @@ function Board() {
         </div>
       </div>
       <div className={styles.mainBoardContainer}>
-        {boards.map((board,index) =>(
+        {state.boards.map((board,index) =>(
           <BoardComponent 
           key ={index} 
           title={board.title} 
           color={board.color}  
           status={board.status} 
           value={board.value} 
-          items={task.filter((item) =>(item.status === board.status))}
-          updateTask={(index ,uT,uD,uS) => updateTask(index ,uT,uD,uS)}
+          items={state.tasks.filter((item) =>(item.status === board.status))}
+          updateTask={(uT,uD,uS,id) => updateTask(uT,uD,uS,id)}
           clearBoard={() => clearBoard(board.status)}
           deleteBoard={() => deleteBoard(index)}
           deletingTask={(id) => deletingTask(id)}
-          boardsArray={boards}
+          boardsArray={state.boards}
           taskColor={board.color}
           /> 
         ))}
@@ -211,7 +294,7 @@ function Board() {
             <div>
               <select className={styles.selectarea}  value={status} onChange={changeStatus}>
                 {
-                  boards.map((board,index) =>(<option value={board.status} key={index}> 
+                  state.boards.map((board,index) =>(<option value={board.status} key={index}> 
                   {board.status}</option>))
                 }
               
