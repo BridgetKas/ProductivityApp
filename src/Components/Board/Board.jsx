@@ -87,7 +87,7 @@ function reducerFunction(state,action) {
         boards: boardsArray
       }
     }
-    
+
     case 'updated_task': {
       const taskArray = state.tasks.map((item) => {
         if(item.id === action.id) {
@@ -126,13 +126,10 @@ function Board() {
   const [title,setTitle] = useState('')
   const [status,setStatus] = useState('incomplete')
   const [description,setDescription] = useState('')
-  // const [task, setTask] = useState(localStorage.getItem (TASK_KEY) ? JSON.parse(localStorage.getItem(TASK_KEY)) : [])
-  // const [boards,setBoards] = useState(localStorage.getItem(BOARD_KEY) ? JSON.parse(localStorage.getItem(BOARD_KEY)) : taskBoards)
   const [boardTitle,setBoardTitle] = useState('')
   const [boardColor,setBoardColor] = useState('')
   const [boardStatus,setBoardStatus] = useState('')
   const [openBoard,setOpenBoard] = useState('')
-
   const [state,dispatch] = useReducer(reducerFunction , {
     boards: localStorage.getItem(BOARD_KEY) ? JSON.parse(localStorage.getItem(BOARD_KEY)) : taskBoards,
     tasks:localStorage.getItem (TASK_KEY) ? JSON.parse(localStorage.getItem(TASK_KEY)) : []
@@ -195,7 +192,6 @@ function Board() {
   
   function addBoard() {
     setOpenBoard(true)
- 
   }
 
   function closeBoard() {
@@ -224,7 +220,6 @@ function Board() {
         id:id
       }
     )
-
   }
 
 
