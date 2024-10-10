@@ -5,11 +5,12 @@ import Modal from "../modal/modalComponent"
 import { FaRegCircle } from "react-icons/fa";
 import { generateId} from "../../utilis";
 import { StateContext } from "../../layOut/stateProvider";
+import { boardColors } from "../../utilis";
 
 function Board() {
   const [openModal,setOpenModal] = useState(false)
   const [title,setTitle] = useState('')
-  const [status,setStatus] = useState('incomplete')
+  const [status,setStatus] = useState('')
   const [description,setDescription] = useState('')
   const [boardTitle,setBoardTitle] = useState('')
   const [boardColor,setBoardColor] = useState('')
@@ -34,12 +35,12 @@ function Board() {
       type:'added_task',
       title:title,
       description:description,
-      status:status,
+      status:status ? status : state.boards[0].status,
       id:generateId()
     })
     setTitle('')
     setDescription('')
-    setStatus('incomplete')
+    setStatus('')
     closeModal()
   }
   
@@ -90,14 +91,21 @@ function Board() {
           </div>
         </div>
         <div className={styles.taskContainer}>
-          <div>
-              <button onClick={isModalOpen}>Add a Task</button>
-          </div>
           <div className={styles.btnContainer}>
-              <button className={styles.button} onClick={addBoard}>Add a Board</button>
+            <button className={styles.button} onClick={addBoard}>Add a Board</button>
           </div>
+          {
+            state.boards.length >= 1 &&
+            <div>
+              <button onClick={isModalOpen}>Add a Task</button>
+            </div>
+          }
+
         </div>
       </div>
+     {state.boards.length === 0 &&
+      <p style={{fontSize:'20px'}}>Add a board to keep track of your tasks </p>
+     }
       <div className={styles.mainBoardContainer}>
         {state.boards.map((board) =>(
           <BoardComponent 
@@ -126,7 +134,7 @@ function Board() {
               </textarea>
             </div>
             <div>
-              <select className={styles.selectarea}  value={status} onChange={changeStatus}>
+              <select className={styles.selectarea}  value={status} onChange={changeStatus} defaultValue='hoo'>
                 {
                   state.boards.map((board,index) =>(<option value={board.status} key={index}> 
                   {board.status}</option>))
@@ -149,9 +157,14 @@ function Board() {
               <input type='text' placeholder='Enter a Board title...' value={boardTitle} 
                 className={styles.taskInput} onChange={(e) => setBoardTitle(e.target.value)}
               />
-              <input type='text' placeholder='Enter  Board color...' value={boardColor} 
-                className={styles.taskInput} onChange={(e) => setBoardColor(e.target.value)}
-              />
+             
+              <select className={styles.selectColor}  value={boardColor} onChange={(e) => setBoardColor(e.target.value)}>
+                {
+                  boardColors.map((boardColor,index) => (<option value={boardColor.color} key={index} 
+                  
+                  >{boardColor.color}</option>))
+                }
+              </select>
               <input type='text' placeholder='Enter  Board status...' value={boardStatus} 
                 className={styles.taskInput} onChange={(e) => setBoardStatus(e.target.value)}
               />

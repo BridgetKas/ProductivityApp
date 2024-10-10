@@ -161,6 +161,11 @@
     padding: 10px;
 }
 
+.selectColor {
+    width: 297px;
+    padding: 10px;
+}
+
 .editContainer {
     position: absolute;
     top: 5px;

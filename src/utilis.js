@@ -46,3 +46,66 @@ export function saveToLocalStorage(key,value){
   }
 ]
 
+
+export const boardColors = [
+  {
+    color: "Black"
+  },
+  {
+    color : "White"
+  },
+  {
+    color: "Red"
+  },
+  {
+    color: "Blue"
+  },
+  {
+    color: "Green"
+  },
+  {
+    color: "Yellow"
+  },
+  {
+    color: "Orange"
+  },
+  {
+    color: "Purple"
+  },
+  {
+    color: "Pink"
+  },
+  {
+    color:"Gray"
+  },
+  {
+    color: "Cyan"
+  },
+  {
+    color:"Magenta"
+  },
+  {
+    color:"Lime"
+  },
+  {
+    color:"Teal"
+  },
+  {
+    color:"Navy"
+  },
+  {
+    color:"Olive"
+  },
+  {
+    color:"Gold"
+  },
+  {
+    color:"Silver"
+  },
+  {
+    color:"Maroon"
+  }
+]
+
+
+
