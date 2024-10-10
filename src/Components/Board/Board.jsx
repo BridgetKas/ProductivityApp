@@ -1,125 +1,10 @@
 import BoardComponent from "./boardcomponent"
 import styles from './Board.module.css'
-import { useState ,useReducer} from "react"
+import { useState ,useContext} from "react"
 import Modal from "../modal/modalComponent"
 import { FaRegCircle } from "react-icons/fa";
-import { BOARD_KEY, generateId, saveToLocalStorage } from "../../utilis";
-import { TASK_KEY } from "../../utilis";
-
-
-
-const taskBoards = [
-  {
-    title:'Backlog',
-    color:'red',
-    status:'incomplete',
-    value:'incomplete'
-  },
-  {
-    title:'In progress',
-    color:'orange',
-    status:'inprogress',
-    value:'inprogress'
-  },
-  {
-    title:'Review',
-    color:'blue',
-    status:'reviewing',
-    value:'reviewing'
-  },
-  {
-    title:'Done',
-    color:'green',
-    status:'complete',
-    value:'complete'
-  }
-]
-
-function reducerFunction(state,action) {
-  switch(action.type) {
-    case 'added_task': {
-      const todoTasks = [
-        ...state.tasks,
-        {
-          title:action.title,
-          description:action.description,
-          status:action.status,
-          id:action.id
-        }                     
-      ]
-     saveToLocalStorage(TASK_KEY, todoTasks)
-      return {
-        ...state,
-        tasks: todoTasks
-      }
-    }
-
-    case 'added_board': {
-      const arrayBoards = [
-        ...state.boards,
-        {
-          title:action.title,
-          color:action.color,
-          status:action.status
-        }
-      ]
-      saveToLocalStorage(BOARD_KEY,arrayBoards)
-      return {
-        ...state,
-        boards: arrayBoards
-      }
-    }
-
-    case 'clear_board': {
-      const newTasksArray =  state.tasks.filter((taskItem) => (action.status !== taskItem.status))
-      saveToLocalStorage(TASK_KEY,newTasksArray)
-      return {
-        ...state,
-        tasks: newTasksArray
-      }
-    }
-
-    case 'delete_board': {
-      const boardsArray = state.boards.filter((item,itemIndex) => (action.index !== itemIndex))
-      saveToLocalStorage(BOARD_KEY,boardsArray)
-      return {
-        ...state,
-        boards: boardsArray
-      }
-    }
-
-    case 'updated_task': {
-      const taskArray = state.tasks.map((item) => {
-        if(item.id === action.id) {
-          return {
-            title:action.title,
-            description:action.description,
-            status:action.status,
-            id:action.id
-          }
-        }else {
-          return  item
-        }
-      })
-      saveToLocalStorage(TASK_KEY,taskArray)
-      return {
-        ...state,
-        tasks:taskArray
-      }
-    }
-
-    case 'deleting_task': {
-      const newTasksArray = state.tasks.filter((item) => {
-     return  item.id !== action.id
-    })
-    saveToLocalStorage(TASK_KEY,newTasksArray)
-      return {
-        ...state,
-        tasks:newTasksArray
-      }
-    }
-  }
-}
+import { generateId} from "../../utilis";
+import { StateContext } from "../../layOut/stateProvider";
 
 function Board() {
   const [openModal,setOpenModal] = useState(false)
@@ -130,18 +15,14 @@ function Board() {
   const [boardColor,setBoardColor] = useState('')
   const [boardStatus,setBoardStatus] = useState('')
   const [openBoard,setOpenBoard] = useState('')
-  const [state,dispatch] = useReducer(reducerFunction , {
-    boards: localStorage.getItem(BOARD_KEY) ? JSON.parse(localStorage.getItem(BOARD_KEY)) : taskBoards,
-    tasks:localStorage.getItem (TASK_KEY) ? JSON.parse(localStorage.getItem(TASK_KEY)) : []
-  })
-
+  const {state,dispatch} = useContext(StateContext)
 
   function isModalOpen() {
     setOpenModal(true)
   }
 
   function closeModal(){
-      setOpenModal(false)
+    setOpenModal(false)
   }
 
   function changeStatus(e) {
@@ -161,34 +42,6 @@ function Board() {
     setStatus('incomplete')
     closeModal()
   }
-
-
-  function updateTask(uT,uD,uS,id) {
-    dispatch(
-      {
-        type:'updated_task',
-        title:uT,
-        description:uD,
-        status:uS,
-        id:id
-      }
-    )
-  }
-
-  function clearBoard(status){
-    dispatch({
-      type:'clear_board',
-      status:status
-    })
-  }
-
-  function deleteBoard(index) {
-    clearBoard(status)
-    dispatch({
-      type:'delete_board',
-      index:index
-    })
-  } 
   
   function addBoard() {
     setOpenBoard(true)
@@ -213,35 +66,25 @@ function Board() {
     closeBoard()
   }
 
-  function deletingTask(id) {
-    dispatch (
-      {
-        type:'deleting_task',
-        id:id
-      }
-    )
-  }
-
-
   return (
     <div>
       <div className={styles.features}>
         <div className={styles.mainiconContainer}>
           <div className={styles.iconContainer}>
               <div className={styles.circleIcon}>
-                  <FaRegCircle  style={{color:'red'}}/>
+                <FaRegCircle  style={{color:'red'}}/>
               </div>
               <p>Task</p>
           </div>
           <div className={styles.iconContainer}>
               <div className={styles.circleIcon}>
-                  <FaRegCircle  style={{color:'orange', fontSize:'18px'}}/>
+                <FaRegCircle  style={{color:'orange', fontSize:'18px'}}/>
               </div>
               <p>Story</p>
           </div>
           <div className={styles.iconContainer}>
               <div className={styles.circleIcon}>
-                  <FaRegCircle  style={{color:'green'}}/>
+                <FaRegCircle  style={{color:'green'}}/>
               </div>
               <p>Bug</p>
           </div>
@@ -256,20 +99,17 @@ function Board() {
         </div>
       </div>
       <div className={styles.mainBoardContainer}>
-        {state.boards.map((board,index) =>(
+        {state.boards.map((board) =>(
           <BoardComponent 
-          key ={index} 
-          title={board.title} 
-          color={board.color}  
-          status={board.status} 
-          value={board.value} 
-          items={state.tasks.filter((item) =>(item.status === board.status))}
-          updateTask={(uT,uD,uS,id) => updateTask(uT,uD,uS,id)}
-          clearBoard={() => clearBoard(board.status)}
-          deleteBoard={() => deleteBoard(index)}
-          deletingTask={(id) => deletingTask(id)}
-          boardsArray={state.boards}
-          taskColor={board.color}
+            key ={board.id} 
+            title={board.title} 
+            color={board.color}  
+            status={board.status} 
+            value={board.value} 
+            id={board.id}
+            items={state.tasks.filter((item) =>(item.status === board.status))}
+            boardsArray={state.boards}
+            taskColor={board.color}
           /> 
         ))}
       
@@ -318,7 +158,7 @@ function Board() {
             </div>
             <div className='modalContainer'>
                 <button className={styles.saveBtn} onClick={saveBoard} 
-                disabled={!boardTitle || !boardColor || !boardStatus}
+                 disabled={!boardTitle || !boardColor || !boardStatus}
                 >
                   Save
                 </button>

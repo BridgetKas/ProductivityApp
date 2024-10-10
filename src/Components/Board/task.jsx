@@ -1,21 +1,18 @@
 import Modal from '../modal/modalComponent'
 import styles from './Board.module.css'
-import {useState} from 'react'
+import {useState, useContext } from 'react'
+import { StateContext } from '../../layOut/stateProvider'
 
-// const colorBar = {
-//     incomplete:'red',
-//     complete:'green',
-//     inprogress:'orange',
-//     reviewing:'blue'
-// }
+
 
 /* eslint-disable react/prop-types */
-function TaskComponent({ id,status,title,description,updateTask,passDeletingTask,boardsArray,taskColor = 'black'}) {
+function TaskComponent({ id,status,title,description,boardsArray,taskColor = 'black'}) {
     const [openTask,setOpenTask] = useState(false)
     const [updatedTitle,setUpdatedTitle] = useState(title)
     const [updatedDescription,setUpdatedDescription] = useState(description)
     const [updatedStatus,setUpdatedStatus] = useState(status)
-    // const [index,setIndex] = useState(0)
+    const { dispatch} = useContext(StateContext)
+
 
     function editingTask() {
         setOpenTask(true)
@@ -30,12 +27,27 @@ function TaskComponent({ id,status,title,description,updateTask,passDeletingTask
     }
 
     function _updateTask(){
-      updateTask(updatedTitle,updatedDescription,updatedStatus,id)
-      setUpdatedTitle('')
-      setUpdatedDescription('')
+      dispatch(
+        {
+          type:'updated_task',
+          title:updatedTitle,
+          description:updatedDescription,
+          status:updatedStatus,
+          id:id
+        }
+      )
       setOpenTask(false)
     }
-  
+    
+    function deletingTask(id) {
+      dispatch (
+        {
+          type:'deleting_task',
+          id:id
+        }
+      )
+    }
+
   return (
     <>
         <div className={styles.taskList} >
@@ -48,14 +60,14 @@ function TaskComponent({ id,status,title,description,updateTask,passDeletingTask
                 <div className={styles.editContainer} >
                     <ion-icon name="pencil-outline" onClick={editingTask}></ion-icon>
                     <div className={styles.delete}>
-                      <ion-icon name="trash-outline" onClick={ () => passDeletingTask(id)} ></ion-icon>
+                      <ion-icon name="trash-outline" onClick={deletingTask} ></ion-icon>
                     </div>
                 </div>
             </div>
         </div>
         
         <Modal show={openTask} onClose={closeTask} status={updatedStatus} >
-          <div  >
+          <div>
             <div className={styles.textareaContainer}>
               <input 
                 type='text' 

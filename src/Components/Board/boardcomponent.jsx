@@ -1,13 +1,14 @@
 import Modal from '../modal/modalComponent'
 import styles from './Board.module.css'
 import TaskComponent from './task'
-import {useState} from 'react'
+import {useState , useContext} from 'react'
+import { StateContext } from '../../layOut/stateProvider'
 
 /* eslint-disable react/prop-types */
-
-function BoardComponent({title,color,items, updateTask,clearBoard,deleteBoard,deletingTask,boardsArray,taskColor}) {
+function BoardComponent({id,title,color,items,boardsArray,taskColor,status}) {
     const [openTabMenu,setOpenTabMenu] = useState(false)
     const length = items.length
+    const {dispatch} = useContext(StateContext)
 
 
     function isTabMenuOpen(){
@@ -18,10 +19,22 @@ function BoardComponent({title,color,items, updateTask,clearBoard,deleteBoard,de
       setOpenTabMenu(false)
     }
 
+    function clearBoard() {
+        dispatch({
+            type:'clear_board',
+            status:status
+        })
+    }
 
- 
+  function deleteBoard() {
+    clearBoard(status)
+    dispatch({
+      type:'delete_board',
+      id:id
+    })
+  } 
+
     return (
-        
         <div className = {styles.mainBoard}>
             <div className={styles.board}>
                 <div className={styles.titleContainer} style={{borderTop:`2px solid ${color}`}}>
@@ -41,8 +54,6 @@ function BoardComponent({title,color,items, updateTask,clearBoard,deleteBoard,de
                             description={item.description} 
                             id={item.id}
                             status={item.status} 
-                            updateTask={(uT,uD,uS,id)=>updateTask(uT,uD,uS,id)}
-                            passDeletingTask={(id) => deletingTask(id)}
                             boardsArray={boardsArray}
                             taskColor={taskColor}
                         />
