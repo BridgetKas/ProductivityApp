@@ -3,6 +3,8 @@ import { createBrowserRouter,RouterProvider} from "react-router-dom";
 import LayoutPage from './layOut/layoutPage';
 import Board from './Components/Board/Board';
 import SettingsComponent from './Components/Settingsf/Settings';
+import Home from './Components/Home/home'
+
 
 
 
@@ -14,7 +16,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Board/>,
+        element:<Home/>,
       },
       {
         path:'tasks',
