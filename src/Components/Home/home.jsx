@@ -1,3 +1,4 @@
+import TodoPage from "../BarChart/stat"
 import HomeComponent from "./homeComponent"
 import styles from './homeComponent.module.css'
 
@@ -17,6 +18,7 @@ function Home() {
             <HomeComponent color="red" title="BackLog" number="5"/>
             <HomeComponent color="blue" title = "Reviewing"number="10"/>
         </div>
+        <TodoPage/>
     </div>
   )
 }
