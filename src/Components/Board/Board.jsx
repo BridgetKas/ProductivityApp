@@ -13,7 +13,7 @@ function Board() {
   const [status,setStatus] = useState('')
   const [description,setDescription] = useState('')
   const [boardTitle,setBoardTitle] = useState('')
-  const [boardColor,setBoardColor] = useState('')
+  const [boardColor,setBoardColor] = useState('black')
   const [boardStatus,setBoardStatus] = useState('')
   const [openBoard,setOpenBoard] = useState('')
   const {state,dispatch} = useContext(StateContext)
@@ -53,6 +53,7 @@ function Board() {
   }
 
   function saveBoard() {
+    console.log('save')
     dispatch (
       {
         type:'added_board',

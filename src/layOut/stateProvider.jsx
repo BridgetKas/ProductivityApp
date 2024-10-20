@@ -1,5 +1,5 @@
 import { createContext, useReducer } from "react"
-import { BOARD_KEY,  saveToLocalStorage, TASK_KEY, generateId } from "../utilis";
+import { BOARD_KEY,  saveToLocalStorage, TASK_KEY, generateId, EVENTS_KEY} from "../utilis";
 
 
 export const StateContext = createContext()
@@ -9,7 +9,8 @@ function StateProvider({children}) {
 
     const [state,dispatch] = useReducer(reducerFunction , {
       boards: localStorage.getItem(BOARD_KEY) ? JSON.parse(localStorage.getItem(BOARD_KEY)) : [],
-      tasks:localStorage.getItem (TASK_KEY) ? JSON.parse(localStorage.getItem(TASK_KEY)) : []
+      tasks:localStorage.getItem (TASK_KEY) ? JSON.parse(localStorage.getItem(TASK_KEY)) : [],
+      events:localStorage.getItem(EVENTS_KEY) ? JSON.parse(localStorage.getItem(EVENTS_KEY)) : []
     })
 
     return (
@@ -80,6 +81,7 @@ function reducerFunction(state,action) {
       }
   
       case 'updated_task': {
+        const date = new Date()
         const taskArray = state.tasks.map((item) => {
           if(item.id === action.id) {
             return {
@@ -92,10 +94,20 @@ function reducerFunction(state,action) {
             return  item
           }
         })
+        const eventsArray = [
+          ...state.events,
+          {
+            status:action.status,
+            day:date,
+            title:action.title,
+          }
+        ]
         saveToLocalStorage(TASK_KEY,taskArray)
+        saveToLocalStorage(EVENTS_KEY,eventsArray)
         return {
           ...state,
-          tasks:taskArray
+          tasks:taskArray,
+          events:eventsArray
         }
       }
   

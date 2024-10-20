@@ -39,7 +39,7 @@ function TaskComponent({ id,status,title,description,boardsArray,taskColor = 'bl
       setOpenTask(false)
     }
     
-    function deletingTask(id) {
+    function deletingTask() {
       dispatch (
         {
           type:'deleting_task',

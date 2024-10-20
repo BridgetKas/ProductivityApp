@@ -6,6 +6,8 @@ export const TASK_KEY = 'todoTasks'
 
 export const BOARD_KEY = 'todoBoards'
 
+export const EVENTS_KEY = 'events'
+
 
 export function saveToLocalStorage(key,value){
     return localStorage.setItem(key, JSON.stringify(value))
