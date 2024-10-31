@@ -86,6 +86,7 @@ function reducerFunction(state,action) {
           if(item.id === action.id) {
             return {
               title:action.title,
+              completed:action.completed,
               description:action.description,
               status:action.status,
               id:action.id
@@ -98,8 +99,10 @@ function reducerFunction(state,action) {
           ...state.events,
           {
             status:action.status,
-            day:date,
+            completed:action.completed,
+            date:date,
             title:action.title,
+            color:action.color,
           }
         ]
         saveToLocalStorage(TASK_KEY,taskArray)

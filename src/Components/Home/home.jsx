@@ -1,6 +1,9 @@
 import TodoPage from "../BarChart/stat"
-import HomeComponent from "./homeComponent"
 import styles from './homeComponent.module.css'
+import ProjectSummary from "./projectSummary"
+// import { useContext} from "react"
+
+// const 
 
 function Home() {
   return (
@@ -9,15 +12,7 @@ function Home() {
             <p className={styles.dashboard}>Dashboard</p>
             <div className = {styles.notifications}><ion-icon name="notifications-outline"></ion-icon></div>
         </div>
-        <div>
-            <p className={styles.project}>Project Summary</p>
-        </div>
-        <div className={styles.mainContainer}>
-            <HomeComponent color="orange" title="In Progress" number="89"/>
-            <HomeComponent color="green" title="Completed" number="7"/>
-            <HomeComponent color="red" title="BackLog" number="5"/>
-            <HomeComponent color="blue" title = "Reviewing"number="10"/>
-        </div>
+        <ProjectSummary />
         <TodoPage/>
     </div>
   )

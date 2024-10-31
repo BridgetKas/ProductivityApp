@@ -1,14 +1,15 @@
 import { Bar } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
-
+import styles from './barChart.module.css'
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
 
 /* eslint-disable react/prop-types */
-const ActivityBarChart = ({ labelData , dataset }) => {
+const ActivityBarChart = ({ dataset ,labels}) => {
   const chartData = {
-    labels:labelData,
+    // labels:labelData,
+    labels:labels,
     datasets: dataset
   };
 
@@ -17,11 +18,21 @@ const ActivityBarChart = ({ labelData , dataset }) => {
     scales: {
       y: {
         beginAtZero: true,
+        ticks:{
+          stepSize:1,
+        }
       },
     },
   };
+  console.log(labels)
 
-  return <Bar data={chartData} options={options} />;
+  return(
+    <div style={{margin:'0 auto'}} className={styles.barContainer}>
+      <Bar data={chartData} options={options}  />
+    </div>
+
+  )
+
 };
 
 export default ActivityBarChart;

@@ -138,6 +138,7 @@
     width: 95%;
 }
 
+
 .listColor {
     height: 100px;
     width: 5px;
@@ -145,6 +146,12 @@
 }
 
 .todos {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.checkboxContainer {
     display: flex;
     align-items: center;
     gap: 10px;
@@ -166,19 +173,30 @@
     padding: 10px;
 }
 
-.editContainer {
+.sideMenuContainer {
     position: absolute;
     top: 5px;
     right: 5px;
-    font-size: 22px;
+   
+}
+
+.editContainer {
+    font-size: 25px;
     cursor: pointer;
     display: flex;
     align-items: center;
+    justify-content: space-center;
     gap: 10px;
 }
- .delete {
+
+.edit {
+    color:black;
+}
+
+.delete {
     color:red;
- }
+}
+
 .textareaContainer {
     display: flex;
     flex-direction: column;
@@ -198,6 +216,15 @@
 
 .saveBtn {
     color: #fff;
+}
+
+.inputContainer {
+    display: flex;
+    align-items: center;
+
+}
+.inputContainer p{
+    color: black;
 }
 
 /* create board css */

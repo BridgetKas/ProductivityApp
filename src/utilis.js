@@ -109,5 +109,39 @@ export const boardColors = [
   }
 ]
 
+export function getYearMonthDate(date){
+  return (`${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`)
+}
 
+
+export function getDay(date) {
+  let day = new Date(date).getDay() + 1
+  
+  switch(day) {
+    case 1:{
+      return 'Sunday'
+    }
+    case 2:{
+      return 'Monday'
+    }
+    case 3:{
+     return 'Tuesday' 
+    }
+    case 4:{
+      return 'Wednesday'
+    }
+    case 5:{
+      return 'Thursday'
+    }
+    case 6:{
+      return 'Friday'
+    }
+    case 7:{
+      return 'Saturday'
+    }
+    default:
+      throw new Error('This is an invalid day')
+  }
+  //[replace the switch with an array]
+}
 

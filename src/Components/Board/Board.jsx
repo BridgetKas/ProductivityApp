@@ -76,19 +76,16 @@ function Board() {
               <div className={styles.circleIcon}>
                 <FaRegCircle  style={{color:'red'}}/>
               </div>
-              <p>Task</p>
           </div>
           <div className={styles.iconContainer}>
               <div className={styles.circleIcon}>
                 <FaRegCircle  style={{color:'orange', fontSize:'18px'}}/>
               </div>
-              <p>Story</p>
           </div>
           <div className={styles.iconContainer}>
               <div className={styles.circleIcon}>
                 <FaRegCircle  style={{color:'green'}}/>
               </div>
-              <p>Bug</p>
           </div>
         </div>
         <div className={styles.taskContainer}>
