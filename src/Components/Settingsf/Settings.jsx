@@ -1,24 +1,25 @@
-import styles from './settings.module.css'
+// import styles from './settings.module.css'
 
 function SettingsComponent() {
   return (
-    <div className={styles.mainSettingsContainer}>
-        <h1 className={styles.settings}>Settings</h1>
-        <div className={styles.settingsContainer}>
-            <p className={styles.setting}>Email address - </p>
-            <p className={styles.setting}>username@gmail.com</p>
+    <div className="p-5 text-left mx-auto mt-[100px]">
+
+        <h1 className="text-left text-2xl">Settings</h1>
+        <div className="flex gap-[30px] flex-row ">
+            <p className="text-[18px] my-[10px]">Email address - </p>
+            <p className="text-[18px] my-[10px]">username@gmail.com</p>
         </div>
-        <div className={styles.settingsContainer}>
-            <p className={styles.setting}>Username - </p>
-            <p className={styles.setting}>user</p>
-        </div>
-        <div>
-            <p className={styles.removeSetting}>Deactivate account</p>
-            <p className={styles.erase}>Deactivating will suspend your account</p>
+        <div className="flex gap-[30px] flex-row ">
+            <p className="text-[18px]  my-[10px]">Username - </p>
+            <p className="text-[18px]  my-[10px]">user</p>
         </div>
         <div>
-            <p className={styles.removeSetting}>Delete account</p>
-            <p className={styles.erase}>Permanently delete your account and its content</p>
+            <p className="text-red-700 font-bold m-0 text-[18px]">Deactivate account</p>
+            <p className="my-[3px] mx-0 text-[18px] ">Deactivating will suspend your account</p>
+        </div>
+        <div>
+            <p className="text-red-700 font-bold m-0 text-[18px]">Delete account</p>
+            <p className=" mx-0 text-[18px] my-[3px]">Permanently delete your account and its content</p>
         </div>
 
     </div>

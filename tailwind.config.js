@@ -5,6 +5,7 @@ export default {
     './src/Components/Home/projectSummary.jsx',
     './src/Components/modal/modalComponent.jsx',
     './src/Components/topBar/topBar.jsx',
+    './src/Components/Settingsf/Settings.jsx',
 
   ],
   theme: {
