@@ -1,5 +1,4 @@
 import HomeComponent from './homeComponent';
-import styles from './homeComponent.module.css';
 import { useContext } from 'react';
 import { StateContext } from '../../layOut/stateProvider';
 
@@ -11,9 +10,9 @@ function ProjectSummary() {
   return (
     <div>
         <div>
-            <p className={styles.project}>Project Summary</p>
+            <p className="text-white text-left pl-[10px] my-[5px] mx-0">Project Summary</p>
         </div>
-        <div className={styles.mainContainer}>
+        <div className="flex items-center justify-between p-2.5 flex-wrap">
 
             {
                 state.boards.map((board,index) =>(

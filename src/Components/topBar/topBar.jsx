@@ -1,5 +1,4 @@
 import { IoSearch } from "react-icons/io5";
-import styles from './topBar.module.css'
 import { RiBearSmileFill } from "react-icons/ri";
 
 
@@ -8,18 +7,19 @@ function TopBar() {
    
   return (
     <header>
-        <div className={styles.topBarContainer}>
-            <div className={styles.mainsearchContainer}>
-                <div className={styles.search}>
+
+        <div className="flex items-center justify-between p-[15px] h-[70px] bg-[#4a4e72] ">
+            <div className="hidden min-[992px]:flex items-center py-2.5 px-[40px] bg-[#3b3e52]">
+                <div>
                     <IoSearch style={{ fontSize: '30px', }}/>
                 </div>
-                <div className={styles.inputContainer}>
-                    <input type="text" className={styles.input} placeholder="Search"/>
+                <div>
+                    <input type="text" className="h-[50px] w-[280px] bg-[#3b3e52] border-0" placeholder="Search"/>
                 </div>
             </div>
-            <div className={styles.authorContainer}>
+            <div className="flex items-center ml-auto">
                 <div>
-                    <p>Bizzy Bridget</p>
+                    <p className="text-[18px] p-0 m-0">Bizzy Bridget</p>
                 </div>
                 <div>
                     <RiBearSmileFill style={{fontSize:"40px"}} />
