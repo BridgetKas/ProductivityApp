@@ -1,5 +1,5 @@
 import BoardComponent from "./boardcomponent"
-import styles from './Board.module.css'
+// import styles from './Board.module.css'
 import { useState ,useContext} from "react"
 import Modal from "../modal/modalComponent"
 import { FaRegCircle } from "react-icons/fa";
@@ -70,41 +70,42 @@ function Board() {
 
   return (
     <div>
-      <div className={styles.features}>
-        <div className={styles.mainiconContainer}>
-          <div className={styles.iconContainer}>
-              <div className={styles.circleIcon}>
-                <FaRegCircle  style={{color:'red'}}/>
+      <div className="flex items-center justify-between p-2.5 min-[992px]:p-0">
+
+        <div className="flex items-center gap-[15px] pt-[15px] min-[992px]:py-5 min-[992px]:px-15">
+          <div className="flex items-center gap-2">
+              <div >
+                <FaRegCircle className="text-red-700 text-[18px]"/>
               </div>
           </div>
-          <div className={styles.iconContainer}>
-              <div className={styles.circleIcon}>
-                <FaRegCircle  style={{color:'orange', fontSize:'18px'}}/>
+          <div className="flex items-center gap-2">
+              <div >
+                <FaRegCircle  className="text-orange-600 text-[18px]"/>
               </div>
           </div>
-          <div className={styles.iconContainer}>
-              <div className={styles.circleIcon}>
-                <FaRegCircle  style={{color:'green'}}/>
+          <div className="flex items-center gap-2">
+              <div>
+                <FaRegCircle className="text-green-600 text-[18px]"/>
               </div>
           </div>
         </div>
-        <div className={styles.taskContainer}>
-          <div className={styles.btnContainer}>
-            <button className={styles.button} onClick={addBoard}>Add a Board</button>
+        <div className="flex items-center gap-5 pr-[15px]">
+          <div >
+            <button className="text-white  p-2.5 outline-none focus:border focus:outline-none focus:border-white" onClick={addBoard}>Add a Board</button>
           </div>
           {
             state.boards.length >= 1 &&
             <div>
-              <button onClick={isModalOpen}>Add a Task</button>
+              <button  className="p-2.5 text-white outline-none focus:border focus:outline-none focus:border-white"onClick={isModalOpen}>Add a Task</button>
             </div>
           }
 
         </div>
       </div>
      {state.boards.length === 0 &&
-      <p style={{fontSize:'20px'}}>Add a board to keep track of your tasks </p>
+      <p  className="text-[20px]">Add a board to keep track of your tasks </p>
      }
-      <div className={styles.mainBoardContainer}>
+      <div className="flex items-start flex-wrap gap-2.5">
         {state.boards.map((board) =>(
           <BoardComponent 
             key ={board.id} 
@@ -121,27 +122,26 @@ function Board() {
       
         <Modal show={openModal} onClose={closeModal} status={status} >
           <div  >
-            <div className={styles.textareaContainer}>
+            <div className="flex flex-col items-center gap-2.5">
               <input type='text' placeholder='Enter a title...' value={title} 
-                className={styles.taskInput} onChange={(e) => setTitle(e.target.value)}
+                className="w-full p-2.5 border border-black placeholder-gray-500" onChange={(e) => setTitle(e.target.value)}
               />
               <textarea id="story" rows="5" cols="33" placeholder='Enter a description' 
-                className={styles.textarea} value={description}
+                className="p-2.5 mb-2.5 border border-black placeholder-gray-500" value={description}
                 onChange={(e) => setDescription(e.target.value)}
               > 
               </textarea>
-            </div>
+            </div> 
             <div>
-              <select className={styles.selectarea}  value={status} onChange={changeStatus} defaultValue='hoo'>
+              <select className="p-2.5 mb-2.5 border border-black text-gray-500 bg-transparent" value={status} onChange={changeStatus} defaultValue='hoo'>
                 {
-                  state.boards.map((board,index) =>(<option value={board.status} key={index}> 
+                  state.boards.map((board,index) =>(<option value={board.status} key={index} > 
                   {board.status}</option>))
                 }
-              
               </select>
             </div>
-            <div className='modalContainer'>
-                <button className={styles.saveBtn} onClick={saveTask} 
+            <div>
+                <button className="text-white" onClick={saveTask} 
                 disabled={!title || !description}
                 >
                   Save
@@ -151,12 +151,12 @@ function Board() {
         </Modal>
         <Modal show={openBoard} onClose={closeBoard} >
           <div>
-            <div className={styles.boardContainer}>
+            <div className="flex flex-col items-center gap-2.5 mb-2.5">
               <input type='text' placeholder='Enter a Board title...' value={boardTitle} 
-                className={styles.taskInput} onChange={(e) => setBoardTitle(e.target.value)}
+                className="w-[274px] p-2.5 text-black border border-black placeholder-gray-500" onChange={(e) => setBoardTitle(e.target.value)}
               />
              
-              <select className={styles.selectColor}  value={boardColor} onChange={(e) => setBoardColor(e.target.value)}>
+              <select className="w-[274px] p-2.5 text-black border border-black bg-transparent"  value={boardColor} onChange={(e) => setBoardColor(e.target.value)}>
                 {
                   boardColors.map((boardColor,index) => (<option value={boardColor.color} key={index} 
                   
@@ -164,11 +164,11 @@ function Board() {
                 }
               </select>
               <input type='text' placeholder='Enter  Board status...' value={boardStatus} 
-                className={styles.taskInput} onChange={(e) => setBoardStatus(e.target.value)}
+                className="w-[274px] p-2.5 text-black border border-black  placeholder-gray-500" onChange={(e) => setBoardStatus(e.target.value)}
               />
             </div>
             <div className='modalContainer'>
-                <button className={styles.saveBtn} onClick={saveBoard} 
+                <button className="text-white" onClick={saveBoard} 
                  disabled={!boardTitle || !boardColor || !boardStatus}
                 >
                   Save

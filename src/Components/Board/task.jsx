@@ -1,5 +1,5 @@
 import Modal from '../modal/modalComponent'
-import styles from './Board.module.css'
+// import styles from './Board.module.css'
 import {useState, useContext } from 'react'
 import { StateContext } from '../../layOut/stateProvider'
 
@@ -14,7 +14,7 @@ function TaskComponent({ id,status,title,description,boardsArray,taskColor = 'bl
     const [updatedDescription,setUpdatedDescription] = useState(description)
     const [updatedStatus,setUpdatedStatus] = useState(status)
     const { dispatch} = useContext(StateContext)
-
+   
 
     function openingSideMenu() {
       setOpenSideMenu(true)
@@ -55,6 +55,7 @@ function TaskComponent({ id,status,title,description,boardsArray,taskColor = 'bl
     }
     
     function deletingTask() {
+
       dispatch (
         {
           type:'deleting_task',
@@ -65,16 +66,16 @@ function TaskComponent({ id,status,title,description,boardsArray,taskColor = 'bl
 
   return (
     <>
-        <div className={styles.taskList} >
-          <div className={styles.listColor} style={{backgroundColor:`${taskColor}`}} ></div>
-          <div className={styles.todos}>
+        <div className="p-2.5 rounded-[5px] text-black flex items-center gap-[9px] text-[15px] bg-white mb-2.5 w-[95%] relative" >
+          <div className="w-[5px] h-[100px] bg-black" style={{backgroundColor:`${taskColor}`}} ></div>
+          <div className="flex flex-row items-center">
             <div>
-              <div className={styles.checkboxContainer}>
-                <p>{title}</p>
+              <div className="flex items-center gap-2.5">
+                <p className="text-left text-[14px] my-2 mx-0">{title}</p>
               </div>
-              <p>{description}</p>
+              <p className="text-left text-[14px] my-2 mx-0">{description}</p>
             </div>
-            <div className={styles.sideMenuContainer} >
+            <div className="absolute top-[5px] right-[5px]" >
               <ion-icon name="ellipsis-horizontal-outline" onClick={openingSideMenu}></ion-icon>
             </div>
           </div>
@@ -83,34 +84,31 @@ function TaskComponent({ id,status,title,description,boardsArray,taskColor = 'bl
         
         <Modal show={openTask} onClose={closeTask} status={updatedStatus} >
           <div>
-            <div className={styles.textareaContainer}>
+            <div className="flex flex-col items-center gap-2.5">
               <input 
-                type='text' 
-                placeholder='Enter a title...'
+                type='text'
                 value={updatedTitle} 
-                className={styles.taskInput} 
+                className="w-full p-2.5 border border-black text-black" 
                 onChange={(e) => setUpdatedTitle(e.target.value)}
               />
               <textarea 
                 id="story" 
                 rows="5"
                 cols="33" 
-                placeholder='Enter a description' 
-                className={styles.textarea}
+                className="p-2.5 mb-2.5 border border-black  text-black "
                 value={updatedDescription} 
                 onChange={(e) => setUpdatedDescription(e.target.value)}
-              > 
-              </textarea>
+              ></textarea>
             </div>
             <div>
-              <select className={styles.selectarea}  value={updatedStatus} onChange={changeStatus}>
+              <select className="p-2.5 mb-2.5 border border-black  text-black bg-transparent" value={updatedStatus} onChange={changeStatus}>
                  {boardsArray.map((board,index) => ( 
                   <option value={board.status} key ={index}>{board.title}</option>
                 ))}
               </select>
             </div>
             <div className='modalContainer'>
-                <button className={styles.saveBtn}
+                <button className="text-black border border-black p-2.5"
                   onClick={_updateTask}  
                   disabled={!title || !description}
                 >
@@ -120,15 +118,15 @@ function TaskComponent({ id,status,title,description,boardsArray,taskColor = 'bl
           </div>
         </Modal>
         <Modal show={openSideMenu} onClose={closeSideMenu}>
-          <div className={styles.inputContainer}>
+          <div className="flex items-center gap-2.5">
             <input type='checkbox' value={completedTask} onChange={() => setCompletedTask(!completedTask)}/>
-            <p>Mark as completed</p>
+            <p className="text-black">Mark as completed</p>
           </div>
-          <div className={styles.editContainer} >
-            <div className={styles.edit}>
+          <div className="text-[25px] cursor-pointer flex items-center justify-center gap-2.5">
+            <div className="text-black">
               <ion-icon name="pencil-outline" onClick={editingTask}></ion-icon>
             </div>
-            <div className={styles.delete}>
+            <div className="text-red-700">
               <ion-icon name="trash-outline" onClick={deletingTask} ></ion-icon>
             </div>
           </div>

@@ -6,7 +6,7 @@ function HomeComponent({title, number,color}) {
         <div  className="flex items-center justify-between">
           <p className="text-xl font-bold my-[5px] mx-0 text-black" style = {{color:(color ==='black') ? 'white': 'black'}}>{number} </p>
           <div className="w-[25px] h-[25px] bg-white text-black 
-            flex items-center justify-between rounded-[50%] text-xl">
+            flex items-center justify-center rounded-[50%] text-xl">
             <ion-icon name="ellipsis-horizontal-outline"></ion-icon>
           </div>
         </div>
