@@ -1,4 +1,4 @@
-import HomeComponent from './homeComponent';
+import HomeComponent from './dashboardComponent';
 import { useContext } from 'react';
 import { StateContext } from '../../layOut/stateProvider';
 

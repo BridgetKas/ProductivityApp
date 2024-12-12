@@ -1,6 +1,6 @@
 
 /* eslint-disable react/prop-types */
-function HomeComponent({title, number,color}) {
+function DashBoardComponent({title, number,color}) {
   return (
     <div className="w-full p-2.5 mb-2.5 rounded-[10px] border border-solid border-black min-[600px]:w-[48%] min-[768px]:w-[33%] min-[992px]:w-[24%]" style = {{backgroundColor:color}}>
         <div  className="flex items-center justify-between">
@@ -17,4 +17,4 @@ function HomeComponent({title, number,color}) {
   )
 }
 
-export default HomeComponent
+export default DashBoardComponent

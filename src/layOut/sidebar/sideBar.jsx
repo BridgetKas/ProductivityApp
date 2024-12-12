@@ -1,35 +1,35 @@
 import { IoHomeOutline } from "react-icons/io5";
 import { FaTasks } from "react-icons/fa";
 import { IoSettingsOutline } from "react-icons/io5";
-// import { PiSignOutFill } from "react-icons/pi";
+import { PiSignOutFill } from "react-icons/pi";
 import { NavLink } from "react-router-dom";
 import styles from './sideBar.module.css'
 
 const sidebar = [
     {
-        title:'Home',
+        title:'Dashboard',
         icon : <IoHomeOutline/>,
         id:1,
-        path:'/'
+        path:'/dashboard'
     },
     {
         title:'Tasks',
         icon:<FaTasks/>,
         id:2,
-        path:'/tasks'
+        path:'/dashboard/tasks'
     },
     {
         title:'Settings',
         icon:<IoSettingsOutline/>,
         id:3,
-        path:'/settings'
+        path:'/dashboard/settings'
     },
-    // {
-    //     title:'Exit',
-    //     icon:<PiSignOutFill/>,
-    //     id:4,
-    //     path:'/exit'
-    // }
+    {
+        title:'Log Out',
+        icon:<PiSignOutFill/>,
+        id:4,
+        path:'/dashboard/logout'
+    }
 ]
 
 

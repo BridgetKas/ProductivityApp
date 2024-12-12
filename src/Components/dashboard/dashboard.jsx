@@ -3,7 +3,7 @@ import ProjectSummary from "./projectSummary"
 // import { useContext} from "react"
 
 
-function Home() {
+function DashBoard() {
   return (
 
     <div className="w-[95%] mx-auto my-12">
@@ -17,4 +17,4 @@ function Home() {
   )
 }
 
-export default Home
+export default DashBoard
