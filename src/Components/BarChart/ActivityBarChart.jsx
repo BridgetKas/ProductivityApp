@@ -24,7 +24,7 @@ const ActivityBarChart = ({ dataset ,labels}) => {
       },
     },
   };
-  console.log(labels)
+  // console.log(labels)
 
   return(
     <div className="w-[400px] mx-auto my-0 flex items-center justify-center sm:w-[500px] md:w-[600px] min-[992px]:w-[900px] lg:w-1200px">

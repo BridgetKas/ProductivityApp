@@ -1,9 +1,38 @@
 import TodoPage from "../BarChart/stat"
 import ProjectSummary from "./projectSummary"
-// import { useContext} from "react"
+import { useEffect, useState} from "react"
+import { useNavigate } from "react-router";
+
+import * as jose from 'jose'
+
 
 
 function DashBoard() {
+  const [error,setError] = useState('')
+  const navigate = useNavigate()
+   useEffect(() =>{
+    async function jwtToken() {
+      const jwtToken = JSON.parse(localStorage.getItem('JWTTOKEN'))
+      const secret = import.meta.env.VITE_SECRET
+      const secretJWTA = new TextEncoder().encode(secret)
+      const { payload, protectedHeader} = await jose.jwtVerify(jwtToken, secretJWTA,)
+      const timeNow = parseInt(new Date().valueOf()/1000)
+
+      try {
+        if(timeNow > payload.exp) {
+          navigate('./signIn')
+        }else if(!payload || !protectedHeader) {
+          navigate('./signIn')
+        }
+      }catch(error) {
+        console.log(error)
+        setError('Invalid password or email')
+      }
+    }
+    jwtToken()
+  },[navigate])
+
+
   return (
 
     <div className="w-[95%] mx-auto my-12">
@@ -13,6 +42,7 @@ function DashBoard() {
         </div>
         <ProjectSummary />
         <TodoPage/>
+        {error && <alert>{error}</alert>}
     </div>
   )
 }

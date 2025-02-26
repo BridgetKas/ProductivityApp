@@ -141,8 +141,8 @@ function Board() {
               </select>
             </div>
             <div>
-                <button className="text-white" onClick={saveTask} 
-                disabled={!title || !description}
+                <button className="text-black" onClick={saveTask} 
+                  disabled={!title || !description}
                 >
                   Save
                 </button>
@@ -168,7 +168,7 @@ function Board() {
               />
             </div>
             <div className='modalContainer'>
-                <button className="text-white" onClick={saveBoard} 
+                <button className="text-black" onClick={saveBoard} 
                  disabled={!boardTitle || !boardColor || !boardStatus}
                 >
                   Save

@@ -4,8 +4,12 @@ import Social from '../Components/social'
 import { IoMdEye ,} from "react-icons/io";
 import { FcGoogle } from "react-icons/fc";
 import { FaApple, FaTwitter  } from "react-icons/fa";
-import { dencryptPassword,  USER_KEY, getSession, saveSession, } from '../utilities/validation';
+import { dencryptPassword,  USER_KEY, getSession, } from '../utilities/validation';
 import {db} from '../../db'
+import * as jose from 'jose'
+
+// const secretKey = 'hustle'
+
 
 function SignInPage() {
 
@@ -13,6 +17,7 @@ function SignInPage() {
     const [password,setPassword] = useState('');
     const [error,setError] = useState('')
     const navigate = useNavigate();
+
 
   // Check whether the isLoggedIn flag is equal to true and redirect the user to the dashboard
     useEffect(() => {
@@ -32,6 +37,8 @@ function SignInPage() {
         }
     }
 
+   
+
     async function handleSubmit(e) {
       e.preventDefault()
       try {
@@ -39,13 +46,31 @@ function SignInPage() {
         .where("email").equalsIgnoreCase(email)
         .first() 
 
-        if(userEmailAuthentication && dencryptPassword(userEmailAuthentication.password) === password) {
-          saveSession(USER_KEY,{email:email,isLoggedIn:true})
-          navigate("/dashboard")
+        if(userEmailAuthentication){
+          const decrptPassword = dencryptPassword(userEmailAuthentication.password)
+          if(decrptPassword){
+            const alg = import.meta.env.VITE_SOME_ALGO
+            const secret = import.meta.env.VITE_SECRET
+
+            const secretJWTA = new TextEncoder().encode(secret)
+            const jwt = await new jose.SignJWT({ email:userEmailAuthentication.email})
+            .setProtectedHeader({ alg })
+            .setExpirationTime('2h')
+            .sign(secretJWTA)
+            
+            localStorage.setItem('JWTTOKEN',JSON.stringify(jwt))
+            // const { payload, protectedHeader } = await jose.jwtVerify(jwt, secretJWTA,)
+            // console.log('header',protectedHeader)
+            // console.log('pay',payload)
+            navigate("/dashboard")
+
+          }
         }
-        setError("Invalid email or password.");
+        // const secretJWT = new TextEncoder().encode('hustle')
+        
       }
-      catch {
+      catch (error){
+        console.log(error)
         setError("Invalid email or password. Please try again."); 
       }
     }

@@ -11,8 +11,7 @@ function LayoutPage() {
     <div>
         <div><TopBar/></div>
         
-        <div className="flex items-start w-[90%] my-0 mx-auto gap-5 justify-between" >
-
+        <div className="flex items-start w-[90%] my-0 mx-auto gap-2.5 sm:gap-5" >
             <div className="p-2.5 mt-[128px] pt-0"><SideBarComponent/></div>
             <div className="flex-[2]">
               <StateProvider >

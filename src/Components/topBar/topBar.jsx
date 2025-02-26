@@ -8,7 +8,7 @@ function TopBar() {
   return (
     <header>
 
-        <div className="flex items-center justify-between p-[15px] h-[70px] bg-[#4a4e72] ">
+        <div className="flex items-center justify-between p-[15px] h-[70px] bg-[#4a4e72]">
             <div className="hidden min-[992px]:flex items-center py-2.5 px-[40px] bg-[#3b3e52]">
                 <div>
                     <IoSearch style={{ fontSize: '30px', }}/>

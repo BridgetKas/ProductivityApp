@@ -23,8 +23,8 @@ const mainbar = [
 
 function LandingPage() {
   return (
-    <>
-        <div className="flex items-center justify-between w-[70%] mx-auto mt-10 mb-14 ">
+    <div className="bg-yellow-400">
+        <div className="flex items-center justify-between  mx-auto mt-10 mb-14 bg-red-900 ">
             <div className="text-4xl">
                 <FcTodoList/>
             </div>
@@ -44,13 +44,13 @@ function LandingPage() {
                 <MdMenu />
             </div>
         </div>
-        <div className='text-center p-3'>
-            <h1 className='text-white text-4xl pr-8 pl-8 lg:pr-14 lg:pl-14'>Easy Task 
+        <div className='text-center p-3  bg-yellow-900'>
+            <h1 className='text-white  mt-0  text-[25px] sm:text-4xl pr-8 pl-8 lg:pr-14 lg:pl-14 bg-purple-700'>Easy Task 
                 Managment  <span className='text-red-500 '>anytime</span>
             </h1>
-            <p className='text-[18px] mt-5'>Manage all your projects in one place with your team and increase your productivity.</p>
+            <p className='text-[17px] mt-5 sm:text-[19px]'>Manage all your projects in one place with your team and increase your productivity.</p>
         </div>
-        <div className='flex align-center gap-2.5  justify-center'>
+        <div className='flex flex-col align-center gap-2.5 sm:flex-row sm:items-center bg-red-950 sm:justify-center'>
             <div>
                 <Button title='Request a demo'/>
             </div>
@@ -67,7 +67,7 @@ function LandingPage() {
                 <FaGoogle />
             </div>
         </div>
-    </>
+    </div>
   )
 }
 
