@@ -45,7 +45,7 @@ function LandingPage() {
             </div>
         </div>
         <div className='text-center p-3  bg-yellow-900'>
-            <h1 className='text-white  mt-0  text-[25px] sm:text-4xl pr-8 pl-8 lg:pr-14 lg:pl-14 bg-purple-700'>Easy Task 
+            <h1 className='text-white  mt-0  text-[25px] sm:text-4xl pr-8 pl-8 lg:pr-14 lg:pl-14'>Easy Task 
                 Managment  <span className='text-red-500 '>anytime</span>
             </h1>
             <p className='text-[17px] mt-5 sm:text-[19px]'>Manage all your projects in one place with your team and increase your productivity.</p>
