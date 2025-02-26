@@ -24,7 +24,7 @@ const mainbar = [
 function LandingPage() {
   return (
     <>
-        <div className="flex items-center justify-between  mx-auto mt-10 mb-14 bg-red-900 ">
+        <div className="flex items-center justify-between  mx-auto mt-10 mb-14 ">
             <div className="text-4xl">
                 <FcTodoList/>
             </div>
