@@ -24,7 +24,7 @@ const mainbar = [
 function LandingPage() {
   return (
     <>
-        <div className="flex items-center justify-between  mx-auto mt-10 mb-14 ">
+        <div className="flex items-center justify-between w-[90%]  mx-auto mt-10 mb-14">
             <div className="text-4xl">
                 <FcTodoList/>
             </div>
@@ -50,7 +50,7 @@ function LandingPage() {
             </h1>
             <p className='text-[17px] mt-5 sm:text-[19px]'>Manage all your projects in one place with your team and increase your productivity.</p>
         </div>
-        <div className='flex flex-col align-center gap-2.5 sm:flex-row sm:items-center sm:justify-center'>
+        <div className='flex flex-col align-center p-3 gap-2.5 sm:flex-row sm:items-center sm:justify-center'>
             <div>
                 <Button title='Request a demo'/>
             </div>
