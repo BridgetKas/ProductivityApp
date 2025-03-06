@@ -53,7 +53,6 @@ function Board() {
   }
 
   function saveBoard() {
-    console.log('save')
     dispatch (
       {
         type:'added_board',
@@ -74,19 +73,19 @@ function Board() {
 
         <div className="flex items-center gap-[15px] pt-[15px] min-[992px]:py-5 min-[992px]:px-15">
           <div className="flex items-center gap-2">
-              <div >
-                <FaRegCircle className="text-red-700 text-[18px]"/>
-              </div>
+            <div >
+              <FaRegCircle className="text-red-700 text-[18px]"/>
+            </div>
           </div>
           <div className="flex items-center gap-2">
-              <div >
-                <FaRegCircle  className="text-orange-600 text-[18px]"/>
-              </div>
+            <div >
+              <FaRegCircle  className="text-orange-600 text-[18px]"/>
+            </div>
           </div>
           <div className="flex items-center gap-2">
-              <div>
-                <FaRegCircle className="text-green-600 text-[18px]"/>
-              </div>
+            <div>
+              <FaRegCircle className="text-green-600 text-[18px]"/>
+            </div>
           </div>
         </div>
         <div className="flex items-center gap-5 pr-[15px]">
@@ -124,10 +123,10 @@ function Board() {
           <div  >
             <div className="flex flex-col items-center gap-2.5">
               <input type='text' placeholder='Enter a title...' value={title} 
-                className="w-full p-2.5 border border-black placeholder-gray-500" onChange={(e) => setTitle(e.target.value)}
+                className="w-full p-2.5 border border-black placeholder-gray-500 text-black" onChange={(e) => setTitle(e.target.value)}
               />
               <textarea id="story" rows="5" cols="33" placeholder='Enter a description' 
-                className="p-2.5 mb-2.5 border border-black placeholder-gray-500" value={description}
+                className="p-2.5 mb-2.5 border border-black placeholder-gray-500  text-black" value={description}
                 onChange={(e) => setDescription(e.target.value)}
               > 
               </textarea>
@@ -141,7 +140,7 @@ function Board() {
               </select>
             </div>
             <div>
-                <button className="text-black" onClick={saveTask} 
+                <button className="text-black p-2.5 border border-black rounded-none" onClick={saveTask} 
                   disabled={!title || !description}
                 >
                   Save
