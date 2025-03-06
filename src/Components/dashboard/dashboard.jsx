@@ -35,7 +35,7 @@ function DashBoard() {
 
   return (
 
-    <div className="w-[95%] mx-auto my-12">
+    <div className="w-[63%] sm:w-[73%] md:w-[83%] lg:w-[93%] text-[18px] sm:text-[20px] md:text-[22px">
         <div className="flex items-center justify-between p-2.5">
             <p className="mx-0 my-1.5 text-xl text-white">Dashboard</p>
             <div className ="text-white text-[22px]"><ion-icon name="notifications-outline"></ion-icon></div>

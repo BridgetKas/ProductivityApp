@@ -4,7 +4,7 @@
 function Button({title}) {
   return (
     <div>
-        <button className="text-black border-2 border-blue-700 p-2.5 rounded-xl">{title}</button>
+      <button className="text-black border-2 border-blue-700 p-2.5 rounded-xl">{title}</button>
     </div>
   )
 }

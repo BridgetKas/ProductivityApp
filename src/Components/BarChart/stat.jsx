@@ -39,15 +39,6 @@ const TodoPage = () => {
       borderWidth: 2,
       })
     setDatasetArray(datasetArray)
-    
-    let statusCount = {}
-    for(const event of eventsArray) {
-      if(statusCount[event]) {
-        statusCount[event]++
-      }else{
-        statusCount[event] = 1;
-      }
-    }
 
     function getEventsBasedOnDayUpdated() {
       const today = new Date();
@@ -64,7 +55,6 @@ const TodoPage = () => {
         const fixed = new Date(sevenDaysAgo)
         let eventDate = new Date(fixed.setDate(fixed.getDate() + i))
         let key = getYearMonthDate(eventDate)
-        // console.log(key)
         let day = getDay(key)
         labelDays.push(day)
         const values = datesArray.filter((event) => {
