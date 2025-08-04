@@ -1,8 +1,20 @@
-# React + Vite
+  
+# Productivity App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+An app that enchances productivity
 
-Currently, two official plugins are available:
+## 🚀 Project Overview
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+An app that enables users track their productivity. This is designed for those that are keen to build their habits and remain consistent.
+
+## 🌐 Deployed version
+
+https://productivity-app-drab.vercel.app/
+
+## 🛠️ Tech Stack
+
+### Frontend
+
+- [React](https://react.dev/)
+- [Tailwind CSS](https://tailwindcss.com/)
+
