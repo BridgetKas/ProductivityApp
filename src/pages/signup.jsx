@@ -120,14 +120,14 @@ function SignUpPage() {
           <div className="text-center my-2">
             <p>
               Already have an account  
-              <a className="no-underline text-red-600 hover:cursor-pointer ml-1">
+              <a  href='/signIn'className="no-underline text-red-600 hover:cursor-pointer ml-1">
                 Sign in 
               </a>
             </p>
           </div>
-            <Social icon={<FcGoogle />} title='Continue with Google'/>
+            {/* <Social icon={<FcGoogle />} title='Continue with Google'/>
             <Social icon={<FaApple />} title='Continue with Apple'/>
-            <Social icon={<FaTwitter />} title='Continue with Twitter'/>
+            <Social icon={<FaTwitter />} title='Continue with Twitter'/> */}
         </div>
       </div>
     </>
