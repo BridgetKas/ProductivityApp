@@ -41,13 +41,16 @@ const router = createBrowserRouter([
         path:'settings',
         element:<SettingsComponent/>
       },
-      {
-        path:'logout',
-        element:<LandingPage/>,
-      }
+      // {
+      //   path:'logout',
+      //   element:<LandingPage/>,
+      // }
       
     ]
   },
+  {
+    
+  }
 ])
 
 
